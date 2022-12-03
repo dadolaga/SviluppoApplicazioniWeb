@@ -2,7 +2,7 @@
 <html lang="EN">
     <head> <title>Registration</title> 
         <?php require "connection.php"; //se non trova file da errore
-            if(isset($_POST['firstname'])){ //in firstname c'è qualcosa? =>dobbiamo registrarlo
+            if(isset($_POST)){ //se riceve qualcosa con POST dobbiamo registrarlo
                 $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));
                 $lastname=mysqli_real_escape_string($connection,trim($_POST['lastname']));
                 $email=mysqli_real_escape_string($connection,trim($_POST['email']));
@@ -15,10 +15,7 @@
                 }
                 $hash=password_hash($password,PASSWORD_DEFAULT);
                 $stmt=mysqli_prepare($connection,"INSERT INTO utenti(Nome,Cognome,Email,Password) VALUES(?,?,?,?)");
-                mysqli_stmt_bind_param($stmt,'s',$firstname);
-                mysqli_stmt_bind_param($stmt,'s',$lastname);
-                mysqli_stmt_bind_param($stmt,'s',$email);
-                mysqli_stmt_bind_param($stmt,'s',$hash);
+                mysqli_stmt_bind_param($stmt,'ssss',$firstname,$lastname,$email,$hash);
                 mysqli_stmt_execute($stmt);
 
                 if(mysqli_affected_rows($connection)===0)

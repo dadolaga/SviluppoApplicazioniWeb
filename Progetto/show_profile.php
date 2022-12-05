@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="EN">
-    <head> <title>Show profile</title> </head>
+    <head> <title>Show profile</title> 
+        <?php
+            require "connection.php"; //se non trova file da errore
+            require "include.php";
+            print_r($_SESSION);
+            if (isset($_SESSION['Id'])){
+                $Id=$_SESSION['Id'];
+                $stmt=mysqli_prepare($connection,"SELECT * FROM utenti WHERE utenti.Id='$Id'");
+                if(!mysqli_stmt_execute($stmt))
+                    echo "Errore nella connessione";
+                $res=mysqli_stmt_get_result($stmt);//piglio risultato
+                $row=mysqli_fetch_array($res);//piglio tutta la riga
+                $FIRSTNAME=htmlentities($row['Nome']); //per evitare attacchi
+                $LASTNAME=htmlentities($row['Cognome']);
+                $EMAIL=htmlentities($row['Email']);
+                $USERNAME=htmlentities($row['Username']);
+                $RESIDANCE=htmlentities($row['Residenza']);
+                $BORN=htmlentities($row['DataNascita']);
+                $LINKWEB=htmlentities($row['SocialWeb']);
+                $SOCIAL=htmlentities($row['Social']);
+            }
+        ?>
+    </head>
     <body>
-        <form action="update_profile.php" method="post">
-            <input type="text" name="firstname" value=<?php echo $FIRSTNAME; ?>>
-            <input type="text" name="lastname" value=<?php echo $LASTNAME; ?>>
-            <input type="email" name="email" value=<?php echo $EMAIL; ?>>
-            <input type="username" name="username" required value=<?php echo $USERNAME; ?>> <!-- per poter commentare deve essere obbligatorio-->
-            <input type="text" name="residance" value=<?php echo $RESIDANCE; ?>>
-            <input type="date" name="born" required value=<?php echo $BORN; ?>>  <!-- si accettano solo maggiorenni-->
-            <input type="text" name="linkWeb" value=<?php echo $LINKWEB; ?>>
-            <input type="text" name="social" value=<?php echo $SOCAL; ?>>
-            <input type="submit" name="submit" value="modification">
+        <?php require "header.php";?>
+
+        <main class="form-signin w-100 my-5">
+        <div class="col-md-10 m-auto col-lg-5">
+        <form action="update_profile.php" method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="firstname" id="floatingFirstname" placeholder="Firstname" value=<?php echo $FIRSTNAME; ?>>
+            <label for="floatingFirstname">Firstname</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="lastname" id="floatingLastname" placeholder="Lastname" value=<?php echo $LASTNAME; ?>>
+            <label for="floatingLastname">Lastname</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com"value=<?php echo $EMAIL; ?>>
+            <label for="floatingEmail">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="username" id="floatingUsername" placeholder="Username" value=<?php echo $USERNAME; ?>>
+            <label for="floatingUsername">Username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="residance" id="floatingResidance" placeholder="Residance" value=<?php echo $RESIDANCE; ?>>
+            <label for="floatingResidance">Residance</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" name="born" id="floatingBorn" placeholder="Born" value=<?php echo $BORN; ?>>
+            <label for="floatingBorn">Born</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="linkweb" id="floatingLink" placeholder="Linkweb"value=<?php echo $LINKWEB; ?>>
+            <label for="floatingLink">Link Web</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="social" id="floatingSocial" placeholder="Social" value=<?php echo $SOCIAL; ?>>
+            <label for="floatingSocial">Social</label>
+          </div>
+          <input type="submit" name="submit" value="modification" class="w-100 btn btn-lg btn-primary">
+          <hr class="my-4">
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
         </form>
-        <a href="delete_profile.php">Delete profile </a>
+      </div>
+        </main>
     </body>
 </html>

@@ -3,4 +3,5 @@
     if (mysqli_connect_errno())
         echo "Riprovare più tardi";
         //controllare file log
+    session_start();
 ?>

@@ -2,7 +2,8 @@
 <html lang="EN">
     <head> <title>Registration</title> 
         <?php require "connection.php"; //se non trova file da errore
-            if(isset($_POST)){ //se riceve qualcosa con POST dobbiamo registrarlo
+        require "include.php";
+            if(isset($_POST["firstname"])){ //se riceve qualcosa con POST dobbiamo registrarlo
                 $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));
                 $lastname=mysqli_real_escape_string($connection,trim($_POST['lastname']));
                 $email=mysqli_real_escape_string($connection,trim($_POST['email']));
@@ -26,13 +27,37 @@
         ?>
     </head>
     <body>
-        <form action="registration.php" method="post">
-            <input type="text" name="firstname" required>
-            <input type="text" name="lastname" required>
-            <input type="email" name="email" required>
-            <input type="password" name="pass" required>
-            <input type="password" name="confirm" required>
-            <input type="submit" name="submit" value="registration">
+        <?php require "header.php";?>
+
+        <main class="form-signin w-100 my-5">
+        <div class="col-md-10 m-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="firstname" id="floatingFirstname" placeholder="Firstname" required>
+            <label for="floatingFirstname">Firstname</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="lastname" id="floatingLastname" placeholder="Lastname" required>
+            <label for="floatingLastname">Lastname</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
+            <label for="floatingEmail">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="pass" id="floatingPassword" placeholder="Password" required>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="confirm" id="floatingConfirm" placeholder="Password" required>
+            <label for="floatingConfirm">Confirm Password</label>
+          </div>
+          <input type="submit" name="submit" value="registration" class="w-100 btn btn-lg btn-primary">
+          <hr class="my-4">
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
         </form>
+      </div>
+        </main>
     </body>
+   
 </html>

@@ -88,7 +88,7 @@
       </button>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-md-center">
       <div class="col-3">
         <h2>Buy again:</h2>
         <div class="row">
@@ -112,8 +112,17 @@
       <div class="col-3 text-center">
         <h2>Evaluate your purchase:</h2>
         <div class="">
-          <img src="image/house.png" height="100" width="100">
-          <img src="image/alien-star.png" height="40" width="40"> <!-- Da riposizionare -->
+            <img src="image/house.png" height="120" width="120">
+          <div class="caption">
+            <img src="image/stars.png" height="70" width="70"> <!-- Da riposizionare -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-3 text-center">
+        <h2>Shopping cart:</h2>
+        <div class="">
+          <img class="rounded-circle" src="image/alien-shopping.jpg" height="200" width="200">
         </div>
       </div>
     </div>

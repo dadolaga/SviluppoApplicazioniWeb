@@ -9,11 +9,7 @@
             // Reset del cookie di sessione
         }
         session_destroy(); // Chiusura sessione
-        header('Location: login.php'); // Reindirizzamento
-        exit; // Fine script
-
-    } else {
-        header('Location: registration.php'); // Reindirizzamento
-        exit; // Fine script
-    }
+    } 
+    header('Location: login.php'); // Reindirizzamento
+    exit; // Fine script
 ?>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="EN">
     <head> <title>Registration</title> 
+    <style> 
+      #login{display: none;}
+    </style>
         <?php require "connection.php"; //se non trova file da errore
         require "include.php";
             if(isset($_POST["firstname"])){ //se riceve qualcosa con POST dobbiamo registrarlo
@@ -21,7 +24,10 @@
 
                 if(mysqli_affected_rows($connection)===0)
                     echo "Errore nella registrazione";
-                else echo "Utente registrato"; 
+                else {
+                  echo "Utente registrato"; 
+                  header("Location: login.php");
+                }
 
             }
         ?>
@@ -31,7 +37,7 @@
 
         <main class="form-signin w-100 my-5">
         <div class="col-md-10 m-auto col-lg-5">
-        <form class="p-4 p-md-5 border rounded-3 bg-light">
+        <form class="p-4 p-md-5 border rounded-3 bg-light"method="POST">
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="firstname" id="floatingFirstname" placeholder="Firstname" required>
             <label for="floatingFirstname">Firstname</label>

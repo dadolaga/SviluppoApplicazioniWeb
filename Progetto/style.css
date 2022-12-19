@@ -1,0 +1,22 @@
+*{
+  color: black !important;
+}
+header>*{
+  color: black !important;
+  font-weight: 1000;
+}
+.truncate {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    vertical-align: top;
+  }
+  body{
+    background-image: linear-gradient(to right,#F72585,#7209B7,#3A0CA3,#4361EE,#4CC9F0);
+  }
+
+  option {
+    color: white!important;
+  }

@@ -15,8 +15,13 @@
             <div class="input-group mx-auto" style="width: 55%;">
                 <select class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black; color: white !important">
                         <option style="color: white;">Categories</option>
-                        <option>Action</option>
-                        <option>Action</option>
+                        <option>Offert</option>
+                        <option>Technology</option>
+                        <option>House tools</option>
+                        <option>Fashion</option>
+                        <option>Vehicle</option>
+                        <option>Food</option>
+                        <option>Art</option>
                 </select>
                 <input type="search" class="form-control float-start " data-mdb-filter='true'placeholder="Search..." aria-label="Search">
                 <button type="button" class="btn btn-primary" style="width: 10%; background-color: black; border-color: black; ">

@@ -40,7 +40,7 @@
                     <h2 class="mt-5">
                       <?php echo $row['Prezzo'];?> §
                     </h2>
-                    <button class="btn btn-primary btn-rounded" onclick="window.open('ShoppingBag.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
+                    <button class="btn btn-primary btn-rounded" onclick="window.open('addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
                 </div>
             </div>
         </div>

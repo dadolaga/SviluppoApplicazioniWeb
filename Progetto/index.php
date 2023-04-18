@@ -127,7 +127,7 @@
       <div class="col-3 text-center">
         <h2>Shopping cart:</h2>
         <div class="">
-          <img class="rounded-circle" src="image/alien-shopping.jpg" height="200" width="200">
+          <a href="ShoppingBag.php"><img class="rounded-circle" src="image/alien-shopping.jpg" height="200" width="200"></a>
         </div>
       </div>
     </div>

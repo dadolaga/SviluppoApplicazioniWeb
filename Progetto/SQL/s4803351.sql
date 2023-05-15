@@ -26,15 +26,15 @@ USE `s4803351`;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `carrello`
+-- Struttura della tabella `cart`
 --
 -- Creazione: Nov 28, 2022 alle 09:39
 --
 
-CREATE TABLE `carrello` (
-  `UtenteId` int(11) NOT NULL,
-  `ProdottoId` int(11) NOT NULL,
-  `Quantita` int(11) NOT NULL
+CREATE TABLE `cart` (
+  `UserId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -47,10 +47,10 @@ CREATE TABLE `carrello` (
 
 CREATE TABLE `prodotti` (
   `Id` int(11) NOT NULL,
-  `Titolo` varchar(200) NOT NULL,
-  `Descrizione` text DEFAULT NULL,
-  `Quantita` int(11) NOT NULL,
-  `Prezzo` decimal(65,2) NOT NULL
+  `Title` varchar(200) NOT NULL,
+  `Description` text DEFAULT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Price` decimal(65,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -63,8 +63,8 @@ CREATE TABLE `prodotti` (
 
 CREATE TABLE `recensioni` (
   `Id` int(11) NOT NULL,
-  `UtenteId` int(11) NOT NULL,
-  `ProdottoId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL,
   `Recensione` text DEFAULT NULL,
   `Valutazione` int(11) NOT NULL,
   `Data` datetime NOT NULL,
@@ -81,14 +81,14 @@ CREATE TABLE `recensioni` (
 
 CREATE TABLE `utenti` (
   `Id` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Cognome` varchar(50) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Surname` varchar(50) NOT NULL,
   `Email` varchar(319) NOT NULL,
   `Username` varchar(250) DEFAULT NULL,
   `Password` varchar(72) NOT NULL,
   `HashPass` varchar(100) NOT NULL,
-  `Residenza` varchar(50) DEFAULT NULL,
-  `DataNascita` date DEFAULT NULL,
+  `Residence` varchar(50) DEFAULT NULL,
+  `BornDate` date DEFAULT NULL,
   `SocialWeb` text DEFAULT NULL,
   `Social` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -98,27 +98,27 @@ CREATE TABLE `utenti` (
 --
 
 --
--- Indici per le tabelle `carrello`
+-- Indici per le tabelle `cart`
 --
-ALTER TABLE `carrello`
-  ADD PRIMARY KEY (`UtenteId`,`ProdottoId`),
-  ADD KEY `Index_utente` (`UtenteId`),
-  ADD KEY `Index_prodotto` (`ProdottoId`);
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`UserId`,`ProductId`),
+  ADD KEY `Index_utente` (`UserId`),
+  ADD KEY `Index_prodotto` (`ProductId`);
 
 --
 -- Indici per le tabelle `prodotti`
 --
 ALTER TABLE `prodotti`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Titolo` (`Titolo`);
+  ADD UNIQUE KEY `Unique_Title` (`Title`);
 
 --
 -- Indici per le tabelle `recensioni`
 --
 ALTER TABLE `recensioni`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `Index_utente` (`UtenteId`),
-  ADD KEY `Index_prodotto` (`ProdottoId`);
+  ADD KEY `Index_utente` (`UserId`),
+  ADD KEY `Index_prodotto` (`ProductId`);
 
 --
 -- Indici per le tabelle `utenti`
@@ -155,18 +155,18 @@ ALTER TABLE `utenti`
 --
 
 --
--- Limiti per la tabella `carrello`
+-- Limiti per la tabella `cart`
 --
-ALTER TABLE `carrello`
-  ADD CONSTRAINT `carrello_ibfk_1` FOREIGN KEY (`ProdottoId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `carrello_ibfk_2` FOREIGN KEY (`UtenteId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `recensioni`
 --
 ALTER TABLE `recensioni`
-  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProdottoId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UtenteId`) REFERENCES `utenti` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

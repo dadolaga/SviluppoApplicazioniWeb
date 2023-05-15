@@ -18,7 +18,7 @@
                     exit(1);
                 }
                 $hash=password_hash($password,PASSWORD_DEFAULT);
-                $stmt=mysqli_prepare($connection,"INSERT INTO utenti(Nome,Cognome,Email,Password) VALUES(?,?,?,?)");
+                $stmt=mysqli_prepare($connection,"INSERT INTO utenti(Name,Surname,Email,Password) VALUES(?,?,?,?)");
                 mysqli_stmt_bind_param($stmt,'ssss',$firstname,$lastname,$email,$hash);
                 mysqli_stmt_execute($stmt);
 

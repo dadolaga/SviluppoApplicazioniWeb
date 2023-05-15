@@ -10,7 +10,7 @@
                 $email=mysqli_real_escape_string($connection,trim($_POST['email']));
                 $password=mysqli_real_escape_string($connection,trim($_POST['pass']));
 
-                $stmt=mysqli_prepare($connection,"SELECT Id,Nome,Password FROM utenti WHERE utenti.Email='$email'");
+                $stmt=mysqli_prepare($connection,"SELECT Id,Name,Password FROM utenti WHERE utenti.Email='$email'");
                 if(!mysqli_stmt_execute($stmt))
                     echo "Errore nella connessione";
                 $res=mysqli_stmt_get_result($stmt);//piglio risultato
@@ -20,12 +20,12 @@
                 print_r($row);
                 if($conta==1 && password_verify($password,$row['Password'])){
                     $_SESSION['Id'] = $row['Id'];
-                    $_SESSION['name']=$row['Nome'];
+                    $_SESSION['name']=$row['Name'];
                     $_SESSION['password']=$password;
                     header("Location: index.php");
                 }
                 else {
-                    echo "Identificazione non riuscita: nome utente o password errati <br />";
+                    echo "Identificazione non riuscita: Name utente o password errati <br />";
                 }
             }
         ?>

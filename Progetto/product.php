@@ -35,9 +35,9 @@
               <img src="product/'.$row['Id'].'.jpg" width="200" height="250">  
               </div>
               <div class="col p-4">
-                <h3 class="mb-0">'.$row['Titolo'].'</h3>
-                <div class="mb-1 text-muted">'.$row['Prezzo'].' §</div>
-                <p class="mb-auto">'.$row['Descrizione'].'</p>
+                <h3 class="mb-0">'.$row['Title'].'</h3>
+                <div class="mb-1 text-muted">'.$row['Price'].' §</div>
+                <p class="mb-auto">'.$row['Description'].'</p>
               </div>
             </div>';
     }

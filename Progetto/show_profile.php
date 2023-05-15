@@ -12,12 +12,12 @@
                     echo "Errore nella connessione";
                 $res=mysqli_stmt_get_result($stmt);//piglio risultato
                 $row=mysqli_fetch_array($res);//piglio tutta la riga
-                $FIRSTNAME=htmlentities($row['Nome']); //per evitare attacchi
-                $LASTNAME=htmlentities($row['Cognome']);
+                $FIRSTNAME=htmlentities($row['Name']); //per evitare attacchi
+                $LASTNAME=htmlentities($row['Surname']);
                 $EMAIL=htmlentities($row['Email']);
                 $USERNAME=htmlentities($row['Username']);
-                $RESIDANCE=htmlentities($row['Residenza']);
-                $BORN=htmlentities($row['DataNascita']);
+                $RESIDANCE=htmlentities($row['Residence']);
+                $BORN=htmlentities($row['BornDate']);
                 $LINKWEB=htmlentities($row['SocialWeb']);
                 $SOCIAL=htmlentities($row['Social']);
             }

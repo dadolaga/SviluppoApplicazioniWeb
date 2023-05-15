@@ -29,16 +29,16 @@
   <div class="container">
   <div class="card">
         <div class="card-body">
-            <h3><?php echo $row['Titolo'];?></h3>
+            <h3><?php echo $row['Title'];?></h3>
             <div class="row">
                 <div class="col-3">
                     <div class="white-box text-center"><img src="product/<?php echo $row['Id'];?>.jpg" style="width: 100%;" class="img-responsive"></div>
                 </div>
                 <div class="col-9" style="padding: 0 7rem;">
                     <h4 class="box-title">Product description</h4>
-                    <p><?php echo $row['Descrizione'];?></p>
+                    <p><?php echo $row['Description'];?></p>
                     <h2 class="mt-5">
-                      <?php echo $row['Prezzo'];?> §
+                      <?php echo $row['Price'];?> §
                     </h2>
                     <button class="btn btn-primary btn-rounded" onclick="window.open('addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
                 </div>

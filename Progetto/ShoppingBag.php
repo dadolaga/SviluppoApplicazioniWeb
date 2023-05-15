@@ -19,9 +19,9 @@
 					<h5 class="mb-0">Cart</h5>
 					</div>
 					<div class="card-body">
-						<!-- inserimento automatico prodotti nel carrello -->
+						<!-- inserimento automatico prodotti nel cart -->
 						<?php
-							$stmt=mysqli_prepare($connection,"SELECT * FROM carrello JOIN product ON ProdottoId = product.Id WHERE UtenteId=?;");
+							$stmt=mysqli_prepare($connection,"SELECT * FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
 							mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
 							if(!mysqli_stmt_execute($stmt))
 								echo "Errore nella connessione";
@@ -40,9 +40,9 @@
 	
 							<div class="col-5 ">
 								<!-- Data -->
-								<h4><strong>'.$row['Titolo'].'</strong></h4>
+								<h4><strong>'.$row['Title'].'</strong></h4>
 									<p class="">
-										<strong>'.$row['Prezzo'].' §</strong>
+										<strong>'.$row['Price'].' §</strong>
 									</p>
 								<button type="button" class="btn btn-primary btn-sm me-1 mb-2" title="rimuovi articolo" onclick="trash('.$row['Id'].','.$cont.');">
 									<i class="fas fa-trash" style="font-size: 25px;" ></i>
@@ -58,7 +58,7 @@
 									</button>
 	
 									<div class="form-outline">
-										<input id="Pezzi_'.$cont.'" min="0" name="quantity" value="'.$row['Pezzi'].'" type="number" class="form-control" disabled/>
+										<input id="Pezzi_'.$cont.'" min="0" name="quantity" value="'.$row['Pice'].'" type="number" class="form-control" disabled/>
 									</div>	
 	
 									<button class="btn btn-primary px-3 ms-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp(); updatePrice('.$row['Id'].','.$cont.');">
@@ -89,7 +89,7 @@
 			
 			</div>
 			<?php
-				$stmt=mysqli_prepare($connection,"SELECT *, SUM(product.Prezzo*Pezzi) AS total FROM carrello JOIN product ON ProdottoId = product.Id WHERE UtenteId=?;");
+				$stmt=mysqli_prepare($connection,"SELECT *, SUM(product.Price*Pice) AS total FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
 				mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
 				if(!mysqli_stmt_execute($stmt))
 					echo "Errore nella connessione";

@@ -1,0 +1,111 @@
+:root {
+    --fg: #17181c;
+    --yellow: #f4a825;
+    --yellow-t: rgba(244, 168, 37, 0);
+    --trans-dur: 0.3s;
+}
+
+/*posizione blocco stelle*/
+.rating__stars {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.rating__star-fill, .rating__star-stroke {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+/*riempie stella*/
+.rating__star-fill {
+    fill: var(--yellow);
+    transform: scale(0);
+}
+
+/*puntatore e spazio stelle*/
+.rating__label {
+    cursor: pointer;
+    padding: 0.125em;
+}
+
+/*transizione 5 stelle*/
+.rating__label--delay1 .rating__star-fill, .rating__label--delay1 .rating__star-stroke {
+    animation-delay: 0.05s;
+}
+.rating__label--delay2 .rating__star-fill, .rating__label--delay2 .rating__star-stroke {
+    animation-delay: 0.1s;
+}
+.rating__label--delay3 .rating__star-fill, .rating__label--delay3 .rating__star-stroke {
+    animation-delay: 0.15s;
+}
+.rating__label--delay4 .rating__star-fill, .rating__label--delay4 .rating__star-stroke {
+    animation-delay: 0.2s;
+}
+
+/*per non mostrare bottoni tondi*/
+.rating__input {
+    display: none;
+}
+
+/*contorno giallo quando ci si passa DUBBIO*/
+.rating__input-1:hover ~ .rating__label:first-of-type .rating__star-stroke, 
+.rating__input-2:hover ~ .rating__label:nth-of-type(-n + 2) .rating__star-stroke, 
+.rating__input-3:hover ~ .rating__label:nth-of-type(-n + 3) .rating__star-stroke, 
+.rating__input-4:hover ~ .rating__label:nth-of-type(-n + 4) .rating__star-stroke, 
+.rating__input-5:hover ~ .rating__label:nth-of-type(-n + 5) .rating__star-stroke {
+    stroke: var(--yellow);
+}
+
+/*animazione stelle*/
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-stroke, 
+.rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-stroke, 
+.rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-stroke, 
+.rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-stroke, 
+.rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-stroke {
+    animation-name: starStroke;
+}
+
+.rating__input-1:checked ~ .rating__label:first-of-type .rating__star-fill, 
+.rating__input-2:checked ~ .rating__label:nth-of-type(-n + 2) .rating__star-fill, 
+.rating__input-3:checked ~ .rating__label:nth-of-type(-n + 3) .rating__star-fill, 
+.rating__input-4:checked ~ .rating__label:nth-of-type(-n + 4) .rating__star-fill, 
+.rating__input-5:checked ~ .rating__label:nth-of-type(-n + 5) .rating__star-fill {
+    animation-name: starFill;
+}
+
+.rating__input-1:not(:checked):hover ~ .rating__label:first-of-type .rating__star-fill, 
+.rating__input-2:not(:checked):hover ~ .rating__label:nth-of-type(2) .rating__star-fill, 
+.rating__input-3:not(:checked):hover ~ .rating__label:nth-of-type(3) .rating__star-fill, 
+.rating__input-4:not(:checked):hover ~ .rating__label:nth-of-type(4) .rating__star-fill, 
+.rating__input-5:not(:checked):hover ~ .rating__label:nth-of-type(5) .rating__star-fill {
+    fill: var(--yellow-t);
+}
+
+/*dimensione animazioni*/
+@keyframes starFill {
+    from, 40% {
+        transform: scale(0);    
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    80% {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/*animazione bordo stelle*/
+@keyframes starStroke {
+    from {
+        transform: scale(1);
+   }
+    20%, to {
+        transform: scale(0);
+   }
+}
+
+

@@ -45,7 +45,9 @@
                 </a>
                 <ul class="dropdown-menu text-small float-start ">
                     <li><a class="dropdown-item" href="#">My order</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li><!--profilo utente stile insta + commenti fatti + edit profile-->
+                    <li><a class="dropdown-item" href="show_profile.php">Profile</a></li><!--profilo utente stile insta + edit profile-->
+                    <li><a class="dropdown-item" href="#">Reviews</a></li><!--recensioni-->
+
                     <li>
                         <hr class="dropdown-divider">
                     </li>

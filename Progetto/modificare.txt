@@ -1,3 +1,9 @@
-Guardare modifica profilo
-fare le recensioni
-fare i vari controlli
+spostare recensioni in product in review
+fare recensioni medie lista prodotti
+spostare carrello
+Guardare modifica profilo (cambio nome utente)
+
+fare i vari controlli (email ecc)
+
+fare animazione ordine
+caricamento sito figo

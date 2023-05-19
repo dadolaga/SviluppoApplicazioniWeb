@@ -1,0 +1,196 @@
+.truck-button {
+    --background: #2b3044;
+    --wheel: #2b3044; /*colore ruote*/
+    --wheel-dot: #fff; /*colore interno ruota*/
+    --back: #6d58ff; /*colore porta pacchi*/
+    --back-inner-shadow: #2d246b; /*colore interno porta pacchi*/
+    --front: #a6accd; /*colore camion*/
+    --front-light: #fff8b1; /*colore luci*/
+    --window: #2b3044; /*colore finestrino*/
+    --street: #646b8c; /*colore strada*/
+    --box: #ffa600; /*colore pacco*/
+    padding: 15px ;
+    width: 172px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    background: var(--background);
+    border-radius: var(--br, 5px);
+    transform-style: preserve-3d; /*per vedere animazione*/
+    transform: rotateX(var(--rx, 0deg)) translateZ(0);
+    transition: transform 0.5s, border-radius 0.3s linear var(--br-d, 0s);
+}
+
+/*crea "strada" per camion*/
+.truck-button:before, .truck-button:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--street);
+    transform: rotateX(90deg) scaleX(var(--sy, 1));
+}
+
+
+/*ordina scritte */
+.truck-button .default, .truck-button .success {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: var(--o);
+    transition: opacity 0.3s;
+}
+
+/*mette scritte in sequenza*/
+.truck-button .success {
+    --o: 0;
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+}
+
+/*visualizza check fine animazione*/
+.truck-button .success svg {
+    width: 12px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: top;
+    fill: none; /*per non vedere svg*/
+    margin: 7px 0 0 4px;
+    stroke-width: 2;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: var(--offset, 16px);
+    transition: stroke-dashoffset 0.4s ease 0.45s;
+}
+
+/*naconde camion prima di animazione*/
+.truck-button .truck {
+    position: absolute;
+    width: 72px;
+    height: 28px;
+    transform: rotateX(90deg) translate3d(var(--truck-x, 4px), calc(var(--truck-y-n, -26) * 1px), 12px);
+}
+
+/*crea ruote*/
+.truck-button .truck:before, .truck-button .truck:after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: var(--l, 18px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: inset 0 0 0 2px var(--wheel);
+    background: var(--wheel-dot);
+    transform: translateY(calc(var(--truck-y) * -1px));
+}
+
+/*crea ruote davanti*/
+.truck-button .truck:after {
+    --l: 54px;
+}
+
+/*crea cassone camion*/
+.truck-button .truck .back {
+    position: absolute;
+    width: 47px;
+    height: 28px;
+    border-radius: 1px 1px;
+    background: linear-gradient(68deg, var(--back-inner-shadow) 22.1%, var(--back-inner-shadow) 100%);
+}
+
+/*???*/
+.truck-button .truck .back:before, .truck-button .truck .back:after,
+.truck-button .truck .front:before, .truck-button .truck .front:after,
+.truck-button .truck .box:before, .truck-button .truck .box:after {
+    content: "";
+    position: absolute;
+}
+
+/*crea parte esterna cassone camion*/
+.truck-button .truck .back:before {
+    left: 11px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--back);
+}
+
+/*crea il davanti del camion */
+.truck-button .truck .front {
+    position: absolute;
+    left: 47px;
+    bottom: -1px;
+    height: 22px;
+    width: 24px;
+    clip-path: polygon(55% 0, 72% 44%, 100% 58%, 100% 100%, 0 100%, 0 0);
+    background: var(--front);
+}
+
+/*crea finestrino camion*/
+.truck-button .truck .front:before {
+    width: 7px;
+    height: 8px;
+    left: 7px;
+    top: 2px;
+    clip-path: polygon(0 0, 60% 0%, 100% 100%, 0% 100%);
+    background: var(--window);
+}
+
+/*crea luci camion*/
+.truck-button .truck .front:after {
+    width: 3px;
+    height: 2px;
+    right: 0;
+    bottom: 3px;
+    background: var(--front-light);
+}
+
+/*crea pacco*/
+.truck-button .truck .box {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    right: 56px;
+    bottom: 0;
+    overflow: hidden;
+    transform: translate(calc(var(--box-x, -24) * 1px), calc(var(--box-y, -6) * 1px)) scale(var(--box-s, 0.5));
+    opacity: var(--box-o, 0);
+    background: var(--box);
+}
+
+
+.truck-button .truck .box:after {
+    width: 6px;
+    left: 100%;
+    top: 0;
+    bottom: 0;
+    background: var(--back);
+    transform: translateX(calc(var(--hx) * 1px));
+}
+
+/*fa partire animazione */
+.truck-button.animation {
+    --rx: -90deg;
+    --br: 0px;
+}
+
+/*nasconde complete order ??*/
+.truck-button.animation .default {
+    --o: 0;
+}
+
+/*crea blocco dopo animazione camion*/
+.truck-button.animation.done {
+    --rx: 0deg;
+    --br: 5px;
+    --br-d: 0.2s;
+}
+
+/*scrive order placed*/
+.truck-button.animation.done .success {
+    --o: 1;
+    --offset: 0;
+}

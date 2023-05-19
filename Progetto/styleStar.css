@@ -85,7 +85,7 @@
 /*dimensione animazioni*/
 @keyframes starFill {
     from, 40% {
-        transform: scale(0);    
+        transform: scale(0);
     }
     60% {
         transform: scale(1.2);

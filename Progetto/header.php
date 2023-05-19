@@ -8,7 +8,6 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="color: black;">
                 <li><a href="index.php" class="nav-link px-2 "> Home </a></li>
                 <li><a href="product.php" class="nav-link px-2 "> Products </a></li>
-                <li><a href="ShoppingBag.php" class="nav-link px-2 <?php if(!isset($_SESSION['Id'])) echo "d-none"?>">Alien Bag</a></li>
 
             </ul>
 
@@ -35,26 +34,30 @@
                 <button type="button" class="btn btn-primary" onclick="window.open('registration.php','_self')">Sign-up</button>
             </div>
             
-            <div class="dropdown text-end position-relative <?php if(!isset($_SESSION['Id'])) echo "d-none"?>" id="alien_user"> <!--d-none nasconde logo-->
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
-                    <?php
-                         echo "<div class='truncate float-start mt-1'> Hello ".$_SESSION["name"]."</div>";//per scrivere nome
-
-                    ?>
-                </a>
-                <ul class="dropdown-menu text-small float-start ">
-                    <li><a class="dropdown-item" href="#">My order</a></li>
-                    <li><a class="dropdown-item" href="show_profile.php">Profile</a></li><!--profilo utente stile insta + edit profile-->
-                    <li><a class="dropdown-item" href="#">Reviews</a></li><!--recensioni-->
-
-                    <li>
-                        <hr class="dropdown-divider">
+            <!--non funziona menù a tendina del profilo è da posizionare meglio-->
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="color: black;">
+                <li><a href="ShoppingBag.php" class="nav-link px-2 <?php if(!isset($_SESSION['Id'])) echo "d-none"?>">Alien Bag</a></li>
+                <li><div class="dropdown text-end position-relative <?php if(!isset($_SESSION['Id'])) echo "d-none"?>" id="alien_user"> <!--d-none nasconde logo-->
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
+                            <?php
+                                echo "<div class='truncate float-start mt-1'> Hello ".$_SESSION["name"]."</div>";//per scrivere nome
+                            ?>
+                        </a>
                     </li>
-                    <li><a class="dropdown-item" href="logout.php" onclick="window.open('logout.php','_self')">Sign out</a></li> 
-                    
-                </ul>
-            </div>
+            
+                    <ul class="dropdown-menu text-small float-start ">
+                        <li><a class="dropdown-item" href="ShoppingBag.php">My order</a></li>
+                        <li><a class="dropdown-item" href="show_profile.php">Profile</a></li><!--profilo utente stile insta + edit profile-->
+                        <li><a class="dropdown-item" href="#">Reviews</a></li><!--recensioni-->
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="logout.php" onclick="window.open('logout.php','_self')">Sign out</a></li> 
+                    </ul>
+                </div>
+            </ul>
         </div>
     </div>
 </header>

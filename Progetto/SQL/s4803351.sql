@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 19, 2023 alle 15:53
+-- Creato il: Dic 03, 2022 alle 14:59
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -28,44 +28,29 @@ USE `s4803351`;
 --
 -- Struttura della tabella `cart`
 --
--- Creazione: Apr 18, 2023 alle 13:51
--- Ultimo aggiornamento: Mag 15, 2023 alle 11:57
+-- Creazione: Nov 28, 2022 alle 09:39
 --
 
 CREATE TABLE `cart` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
-  `Pice` int(11) NOT NULL
+  `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `categories`
+-- Struttura della tabella `prodotti`
 --
--- Creazione: Dic 19, 2022 alle 11:21
---
-
-CREATE TABLE `categories` (
-  `Id` int(11) NOT NULL,
-  `Name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `product`
---
--- Creazione: Apr 18, 2023 alle 13:58
+-- Creazione: Nov 28, 2022 alle 09:38
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `prodotti` (
   `Id` int(11) NOT NULL,
   `Title` varchar(200) NOT NULL,
   `Description` text DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
-  `Price` decimal(65,2) NOT NULL,
-  `Category` int(11) NOT NULL DEFAULT 1
+  `Price` decimal(65,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,17 +58,17 @@ CREATE TABLE `product` (
 --
 -- Struttura della tabella `recensioni`
 --
--- Creazione: Apr 18, 2023 alle 14:08
+-- Creazione: Nov 28, 2022 alle 09:42
 --
 
 CREATE TABLE `recensioni` (
   `Id` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
-  `Text` text DEFAULT NULL,
-  `Rating` int(11) NOT NULL,
-  `Date` datetime NOT NULL,
-  `Verify` tinyint(1) NOT NULL DEFAULT 0
+  `Recensione` text DEFAULT NULL,
+  `Valutazione` int(11) NOT NULL,
+  `Data` datetime NOT NULL,
+  `Verifica` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -91,8 +76,7 @@ CREATE TABLE `recensioni` (
 --
 -- Struttura della tabella `utenti`
 --
--- Creazione: Apr 18, 2023 alle 14:04
--- Ultimo aggiornamento: Mag 15, 2023 alle 11:58
+-- Creazione: Nov 28, 2022 alle 09:43
 --
 
 CREATE TABLE `utenti` (
@@ -122,19 +106,11 @@ ALTER TABLE `cart`
   ADD KEY `Index_prodotto` (`ProductId`);
 
 --
--- Indici per le tabelle `categories`
+-- Indici per le tabelle `prodotti`
 --
-ALTER TABLE `categories`
+ALTER TABLE `prodotti`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Name` (`Name`);
-
---
--- Indici per le tabelle `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Titolo` (`Title`),
-  ADD KEY `Index_category` (`Category`);
+  ADD UNIQUE KEY `Unique_Title` (`Title`);
 
 --
 -- Indici per le tabelle `recensioni`
@@ -157,15 +133,9 @@ ALTER TABLE `utenti`
 --
 
 --
--- AUTO_INCREMENT per la tabella `categories`
+-- AUTO_INCREMENT per la tabella `prodotti`
 --
-ALTER TABLE `categories`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `product`
---
-ALTER TABLE `product`
+ALTER TABLE `prodotti`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -188,20 +158,14 @@ ALTER TABLE `utenti`
 -- Limiti per la tabella `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `categories` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `recensioni`
 --
 ALTER TABLE `recensioni`
-  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 

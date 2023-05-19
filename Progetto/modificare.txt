@@ -1,9 +1,9 @@
-spostare recensioni in product in review
+spostare recensioni di product in review
 fare recensioni medie lista prodotti
-spostare carrello
+spostare carrello (aggiustare posizione, ecc)
 Guardare modifica profilo (cambio nome utente)
 
 fare i vari controlli (email ecc)
 
-fare animazione ordine
+fare animazione ordine (camion esce fuori dal bottone a fine animazione)
 caricamento sito figo

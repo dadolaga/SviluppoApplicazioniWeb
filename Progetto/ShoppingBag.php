@@ -4,9 +4,10 @@
 	<?php 
 		require "connection.php";
         require "include.php";
+		
+		
 	?>
-  <style>
-  </style>
+	<link href="completeOrder.css" rel="stylesheet">
 
 <body>
 	<?php require "header.php";?>
@@ -103,29 +104,41 @@
 				<h5 class="mb-0">Summary</h5>
 				</div>
 				<div class="card-body">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-					Products
-					<span id="total_1"><?php echo $total ?> §</span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between align-items-center px-0">
-					Shipping
-					<span>Gratis</span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-					<div>
-						<strong>Total amount</strong>
-						<strong>
-						<p class="mb-0">(including IVA)</p>
-						</strong>
-					</div>
-					<span><strong id="total_2"><?php echo $total ?> §</strong></span>
-					</li>
-				</ul>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+						Products
+						<span id="total_1"><?php echo $total ?> §</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+						Shipping
+						<span>Gratis</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+						<div>
+							<strong>Total amount</strong>
+							<strong>
+							<p class="mb-0">(including IVA)</p>
+							</strong>
+						</div>
+						<span><strong id="total_2"><?php echo $total ?> §</strong></span>
+						</li>
+					</ul>
 
-				<button type="button" class="col-12 btn btn-primary btn-lg btn-block">
-					Go to checkout
-				</button>
+					<div style="margin-left:25%">
+						<button class="truck-button">
+							<span class="default">Complete Order</span>
+							<span class="success">
+								Order Placed
+							</span>
+							<div class="truck">
+								<div class="wheel"></div>
+								<div class="back"></div>
+								<div class="front"></div>
+								<div class="box"></div>
+							</div>
+						</button>
+					</div>
+
 				</div>
 				<div class="card mb-4 mb-lg-0">
 					<div class="card-body">
@@ -176,3 +189,102 @@
 </script>
 
 </html>
+
+
+<script>
+    document.querySelectorAll('.truck-button').forEach(button => {
+        button.addEventListener('click', e =>{
+
+            e.preventDefault();
+            let box = button.querySelector('.box'),
+                truck = button.querySelector('.truck');
+
+            if(!button.classList.contains('done')) {
+                if(!button.classList.contains('animation')) {
+                    button.classList.add('animation');
+
+                    gsap.to(button, {
+                        '--box-s': 1,
+                        '--box-o': 1,
+                        duration: .3,
+                        delay: .5
+                    });
+
+                    gsap.to(box, {
+                        x: 0,
+                        duration: .4,
+                        delay: .7
+                    });
+
+                    gsap.to(button, {
+                        '--hx': -5,
+                        '--bx': 50,
+                        duration: .18,
+                        delay: .92
+                    });
+
+                    gsap.to(box, {
+                        y: 0,
+                        duration: .1,
+                        delay: 1.15
+                    });
+
+                    gsap.set(button, {
+                        '--truck-y': 0,
+                        '--truck-y-n': -26
+                    });
+
+                    gsap.to(button, {
+                        '--truck-y': 1,
+                        '--truck-y-n': -25,
+                        duration: .2,
+                        delay: 1.25,
+                        onComplete() {
+                            gsap.timeline({
+                                onComplete() {
+                                    button.classList.add('done');
+                                }
+                            }).to(truck, {
+                                x: 0,
+                                duration: .4
+                            }).to(truck, {
+                                x: 40,
+                                duration: 1
+                            }).to(truck, {
+                                x: 20,
+                                duration: .6
+                            }).to(truck, {
+                                x: 96,
+                                duration: .4
+                            });
+                            gsap.to(button, {
+                                '--progress': 1,
+                                duration: 2.4,
+                                ease: "power2.in"
+                            });
+                        }
+                    });
+                }
+            }
+            else {
+                button.classList.remove('animation', 'done');
+                gsap.set(truck, {
+                    x: 4
+                });
+                gsap.set(button, {
+                    '--progress': 0,
+                    '--hx': 0,
+                    '--bx': 0,
+                    '--box-s': .5,
+                    '--box-o': 0,
+                    '--truck-y': 0,
+                    '--truck-y-n': -26
+                });
+                gsap.set(box, {
+                    x: -24,
+                    y: -6
+                });
+            }
+        });
+    });
+</script>

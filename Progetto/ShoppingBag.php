@@ -124,7 +124,7 @@
 						</li>
 					</ul>
 
-					<div style="margin-left:25%">
+					<div style="display: flex; justify-content: center;">
 						<button class="truck-button">
 							<span class="default">Complete Order</span>
 							<span class="success">

@@ -9,7 +9,7 @@
     --window: #2b3044; /*colore finestrino*/
     --street: #646b8c; /*colore strada*/
     --box: #ffa600; /*colore pacco*/
-    padding: 15px ;
+    padding: 15px 0;
     width: 172px;
     cursor: pointer;
     text-align: center;
@@ -48,20 +48,6 @@
     top: 12px;
     left: 0;
     right: 0;
-}
-
-/*visualizza check fine animazione*/
-.truck-button .success svg {
-    width: 12px;
-    height: 10px;
-    display: inline-block;
-    vertical-align: top;
-    fill: none; /*per non vedere svg*/
-    margin: 7px 0 0 4px;
-    stroke-width: 2;
-    stroke-dasharray: 16px;
-    stroke-dashoffset: var(--offset, 16px);
-    transition: stroke-dashoffset 0.4s ease 0.45s;
 }
 
 /*naconde camion prima di animazione*/

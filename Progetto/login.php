@@ -3,6 +3,7 @@
     <head> <title>Login</title> 
       <style> 
         #login{display: none;}
+        
       </style>
         <?php require "connection.php"; //se non trova file da errore
         require "include.php";
@@ -34,8 +35,8 @@
         <?php require "header.php";?>
 
         <main class="form-signin w-100">
-        <div class="col-md-10 m-auto col-lg-5">
-        <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+        <div class="col-md-10 m-auto col-lg-5" >
+        <form class="p-4 p-md-5 rounded-3" style="background-color: #f8edeb4a;" method="POST">
           <div class="form-floating mb-3">
             <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
             <label for="floatingEmail">Email address</label>

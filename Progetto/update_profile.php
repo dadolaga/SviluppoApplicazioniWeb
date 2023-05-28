@@ -14,21 +14,25 @@
             $username='NULL';
         else
             $username = "\"$username\"";
+
         $residance=mysqli_real_escape_string($connection,trim($_POST['residance']));
         if(empty($residance)) 
             $residance='NULL';
         else
-            $residance = "\"$residence\"";
+            $residance = "\"$residance\"";
+
         $born=mysqli_real_escape_string($connection,trim($_POST['born']));
         if(empty($born)) 
             $born='NULL';
         else    
             $born = "\"$born\"";
+
         $linkweb=mysqli_real_escape_string($connection,trim($_POST['linkweb']));
         if(empty($linkweb)) 
             $linkweb='NULL';
         else
             $linkweb="\"$linkweb\"";
+
         $social=mysqli_real_escape_string($connection,trim($_POST['social']));
         if(empty($social)) 
             $social='NULL';

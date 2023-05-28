@@ -39,7 +39,13 @@
                 <a href="#" class=" link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex;align-items: center;">
                     <img src="image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
                     <?php
-                    echo "<div class='truncate float-start mt-1'> Hello " . $_SESSION["name"] . "</div>"; //per scrivere nome
+                    $stmt=mysqli_prepare($connection,"SELECT Name FROM utenti WHERE utenti.Id=".$_SESSION["Id"]);
+                    if(!mysqli_stmt_execute($stmt))
+                        echo "Errore nella connessione";
+                    $res=mysqli_stmt_get_result($stmt);//piglio risultato
+                    $row=mysqli_fetch_array($res);//piglio tutta la riga
+
+                    echo "<div class='truncate float-start mt-1'> Hello " .$row["Name"]. "</div>"; //per scrivere nome
                     ?>
                 </a>
 

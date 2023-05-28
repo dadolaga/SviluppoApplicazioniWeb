@@ -1,7 +1,7 @@
-spostare recensioni di product in review
-fare recensioni medie lista prodotti
-Guardare modifica profilo (cambio nome utente)
+fare recensioni medie lista prodotti e prodotti singoli
+mettere categorie cliccabili
+fare cerca
 
-fare i vari controlli (email ecc)
+fare i vari controlli (email, password ecc)
 
 caricamento sito figo

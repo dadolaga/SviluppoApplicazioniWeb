@@ -7,9 +7,9 @@
 
 /*posizione blocco stelle*/
 .rating__stars {
-    display: flex;
-    position: relative;
-    justify-content: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .rating__star-fill, .rating__star-stroke {

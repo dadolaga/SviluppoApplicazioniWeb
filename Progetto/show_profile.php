@@ -4,7 +4,6 @@
         <?php
             require "connection.php"; //se non trova file da errore
             require "include.php";
-            print_r($_SESSION);
             if (isset($_SESSION['Id'])){
                 $Id=$_SESSION['Id'];
                 $stmt=mysqli_prepare($connection,"SELECT * FROM utenti WHERE utenti.Id='$Id'");

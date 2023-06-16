@@ -2,9 +2,25 @@
 
 <head>
 	<?php 
+	//quando prodotto viene acquistato automaticamente appare 
+	//la quantità prelevata in stock quindi non viene gestita la decrementazione nel DB
 		require "connection.php";
         require "include.php";
-		
+		if(!empty($_POST)){
+			$key=array_keys($_POST);
+			for($i=0;$i<count($key);$i++){
+				$id=explode("_",$key[$i])[1];
+				$quantity=$_POST[$key[$i]];
+
+				$stmt = mysqli_prepare($connection, "INSERT INTO myOrder(UserId, ProductId, Quantity) VALUES(?,?,?);");
+				mysqli_stmt_bind_param($stmt, 'iii', $_SESSION['Id'], $id, $quantity);
+				mysqli_stmt_execute($stmt);
+
+				$stmt = mysqli_prepare($connection, "DELETE FROM cart WHERE UserId=? AND ProductId=?;");
+				mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $id);
+				mysqli_stmt_execute($stmt);
+			}
+		}
 		
 	?>
 	<link href="completeOrder.css" rel="stylesheet">
@@ -20,60 +36,64 @@
 					<h5 class="mb-0">Cart</h5>
 					</div>
 					<div class="card-body">
-						<!-- inserimento automatico prodotti nel cart -->
-						<?php
-							$stmt=mysqli_prepare($connection,"SELECT * FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
-							mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-							if(!mysqli_stmt_execute($stmt))
-								echo "Errore nella connessione";
-							$res=mysqli_stmt_get_result($stmt);//piglio risultato
+						<form method="POST" id="form_cart">
+							<!-- inserimento automatico prodotti nel cart -->
+							<?php
+								$stmt=mysqli_prepare($connection,"SELECT * FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
+								mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
+								if(!mysqli_stmt_execute($stmt))
+									echo "Errore nella connessione";
+								$res=mysqli_stmt_get_result($stmt);//piglio risultato
 
-							$cont = 0;
-							while(($row=mysqli_fetch_array($res))!=NULL){
-							echo '<div id="row_'.$cont.'" class="row">
-							<div class="col-3 ">
-							<!-- Image -->
-								<div class="bg-image hover-overlay ripple rounded" >
-									<img class="w-100" src="product/' .$row['Id']. '.jpg" onclick="window.open(\'singleProduct.php?id='.$row['Id'].'\', \'_self\')"/>
+								$cont = 0;
+								while(($row=mysqli_fetch_array($res))!=NULL){
+								echo '<div id="row_'.$cont.'" class="row">
+								<div class="col-3 ">
+								<!-- Image -->
+									<div class="bg-image hover-overlay ripple rounded" >
+										<img class="w-100" src="product/' .$row['Id']. '.jpg" onclick="window.open(\'singleProduct.php?id='.$row['Id'].'\', \'_self\')"/>
+									</div>
+								<!-- Image -->
 								</div>
-							<!-- Image -->
-							</div>
-	
-							<div class="col-5 ">
-								<!-- Data -->
-								<h4><strong>'.$row['Title'].'</strong></h4>
-									<p class="">
-										<strong>'.$row['Price'].' §</strong>
-									</p>
-								<button type="button" class="btn btn-primary btn-sm me-1 mb-2" title="rimuovi articolo" onclick="trash('.$row['Id'].','.$cont.');">
-									<i class="fas fa-trash" style="font-size: 25px;" ></i>
-								</button>
-								<!-- Data -->	
-							</div>
-	
-							<div class="col-4 ">
-							<!-- Quantity -->
-								<div class="d-flex " style="max-width: 300px">
-									<button class="btn btn-primary px-3 me-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown(); updatePrice('.$row['Id'].','.$cont.');">
-										<i class="fas fa-minus"></i>
+		
+								<div class="col-5 ">
+									<!-- Data -->
+									<h4><strong>'.$row['Title'].'</strong></h4>
+										<p class="">
+											<strong>'.$row['Price'].' §</strong>
+										</p>
+									<button type="button" class="btn btn-primary btn-sm me-1 mb-2" title="rimuovi articolo" onclick="trash('.$row['Id'].','.$cont.');">
+										<i class="fas fa-trash" style="font-size: 25px;" ></i>
 									</button>
-	
-									<div class="form-outline">
-										<input id="Pezzi_'.$cont.'" min="0" name="quantity" value="'.$row['Pice'].'" type="number" class="form-control" disabled/>
-									</div>	
-	
-									<button class="btn btn-primary px-3 ms-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp(); updatePrice('.$row['Id'].','.$cont.');">
-										<i class="fas fa-plus"></i>
-									</button>
+									<!-- Data -->	
 								</div>
-							</div>
-							<hr class="my-4" />
-						</div>';
+		
+								<div class="col-4 ">
+								<!-- Quantity -->
+									<div class="d-flex " style="max-width: 300px">
+										<!-- bottone decremento quantità -->
+										<div class="btn btn-primary px-3 me-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown(); updatePrice('.$row['Id'].','.$cont.');" readonly>
+											<i class="fas fa-minus"></i>
+										</div>
+		
+										<div class="form-outline">
+											<input id="Pezzi_'.$cont.'" min="0" name="quantity_'.$row['Id'].'" value="'.$row['Pice'].'" type="number" class="form-control" readonly/>
+										</div>	
+										<!-- bottone incremento quantità -->
+										<div class="btn btn-primary px-3 ms-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp(); updatePrice('.$row['Id'].','.$cont.');" readonly>
+											<i class="fas fa-plus"></i>
+										</div>
+									</div>
+								</div>
+								<hr class="my-4" />
+							</div>';
 
-						$cont++;
-							}
-						?>
+							$cont++;
+								}
+							?>
 
+						</form>
+						
 				</div>
 			</div>
 			<div class="card mb-4 <?php if($cont == 0) echo "d-none";?>">
@@ -186,6 +206,11 @@
 			}
 		});
 	}
+
+	function reload(){
+		//ricarica pagina dopo ordine
+		document.getElementById("form_cart").submit();
+	}
 </script>
 
 </html>
@@ -194,6 +219,7 @@
 <script>
     document.querySelectorAll('.truck-button').forEach(button => {
         button.addEventListener('click', e =>{
+			setTimeout(reload,5500);
 
             e.preventDefault();
             let box = button.querySelector('.box'),

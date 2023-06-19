@@ -1,11 +1,17 @@
-<main class="form-signin w-100">
-            <form class="rating__stars" id="rating_form_<?php echo $row['Id'];?>" onmouseenter="disableWindowsOpen();" onmouseleave="enableWindowsOpen();">
+<main class="form-signin rating__stars " style="width: 230px; position:absolute; right:5px;" id="rating_form_<?php echo $row['Id'];?>" 
+        onmouseenter="disableWindowsOpen();" onmouseleave="enableWindowsOpen();">
+ 
                 <!--identificare le valutazioni -->
-                <input id="rating_<?php echo $row['Id'];?>-1" class="rating__input rating__input-1" type="radio" name="rating" value="1">
-                <input id="rating_<?php echo $row['Id'];?>-2" class="rating__input rating__input-2" type="radio" name="rating" value="2">
-                <input id="rating_<?php echo $row['Id'];?>-3" class="rating__input rating__input-3" type="radio" name="rating" value="3">
-                <input id="rating_<?php echo $row['Id'];?>-4" class="rating__input rating__input-4" type="radio" name="rating" value="4">
-                <input id="rating_<?php echo $row['Id'];?>-5" class="rating__input rating__input-5" type="radio" name="rating" value="5">
+                <input id="rating_<?php echo $row['Id'];?>-1" class="rating__input rating__input-1" type="radio" name="rating" value="1"required 
+                <?php if($rating_value==1) echo ("checked")?>>
+                <input id="rating_<?php echo $row['Id'];?>-2" class="rating__input rating__input-2" type="radio" name="rating" value="2"
+                <?php if($rating_value==2) echo ("checked")?>>
+                <input id="rating_<?php echo $row['Id'];?>-3" class="rating__input rating__input-3" type="radio" name="rating" value="3"
+                <?php if($rating_value==3) echo ("checked")?>>
+                <input id="rating_<?php echo $row['Id'];?>-4" class="rating__input rating__input-4" type="radio" name="rating" value="4"
+                <?php if($rating_value==4) echo ("checked")?>>
+                <input id="rating_<?php echo $row['Id'];?>-5" class="rating__input rating__input-5" type="radio" name="rating" value="5"
+                <?php if($rating_value==5) echo ("checked")?>>
                 
                 <?php
                     for($i=1;$i<=5;$i++){
@@ -26,9 +32,5 @@
                         </label>';
                     }
                 ?>
-                
-            </form>
-        
-        
 </main>
 

@@ -18,22 +18,45 @@
     $offset=0;
     $stmt=mysqli_prepare($connection,"SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=?;");
     mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-	mysqli_stmt_execute($stmt);
+	  mysqli_stmt_execute($stmt);
     $res=mysqli_stmt_get_result($stmt);
 
     $array_id=array();
     while(($row=mysqli_fetch_array($res))!=NULL){
+      $stmt=mysqli_prepare($connection,"SELECT Rating FROM recensioni WHERE UserId=? AND ProductId=?;");
+      mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $row['Id']);
+      mysqli_stmt_execute($stmt);
+      $res_rating=mysqli_stmt_get_result($stmt);
+      $rating_value=0;
+      $button_disabled="";
+      if(($row_rating=mysqli_fetch_array($res_rating))!=NULL){
+        $rating_value=$row_rating[0];
+        $button_disabled="disabled";
+      }
       array_push($array_id,$row['Id']);
-      echo '<div class="row border rounded mb-4 bg-white position-relative" onclick="openWindow('.$row['Id'].')">
+      echo '<form action="addReview.php" method="GET">
+              <div class="row mx-5 border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
               <img src="product/'.$row['Id'].'.jpg" width="200" height="250">  
               </div>
-              <div class="col p-4">
+              
+              <div class="row col p-4">
                 <h3 class="mb-0">'.$row['Title'].'</h3>
+                
+                  <div class="col-8">
+                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="4" required> questa è la recensione del prodotto</textarea>
+                  </div>
+                  <div class="col-1"></div>
+                  <button type="submit" class="col-3 btn btn-dark" id="btn-dark" '.$button_disabled.'>Recensisci</button>
+
+                  <input type="hidden" name="id" value="'.$row['Id'].'"> </input>
                 ';
                 include("starRating.php");
+                
       echo' </div>
-            </div>';
+            </div>
+            </form>';
     }
     ?>
     

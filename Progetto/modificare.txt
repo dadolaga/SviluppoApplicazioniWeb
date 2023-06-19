@@ -1,4 +1,4 @@
-fare recensioni medie lista prodotti e prodotti singoli
+fare recensioni medie lista prodotti 
 mettere categorie cliccabili
 fare cerca
 

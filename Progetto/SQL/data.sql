@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 19, 2023 alle 15:52
+-- Creato il: Giu 27, 2023 alle 11:57
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `s4803351`
 --
+USE `s4803351`;
 
 --
 -- Svuota la tabella prima dell'inserimento `categories`

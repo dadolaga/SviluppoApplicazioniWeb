@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 03, 2022 alle 14:59
+-- Creato il: Giu 27, 2023 alle 11:53
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -28,29 +28,55 @@ USE `s4803351`;
 --
 -- Struttura della tabella `cart`
 --
--- Creazione: Nov 28, 2022 alle 09:39
---
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL
+  `Pice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `prodotti`
---
--- Creazione: Nov 28, 2022 alle 09:38
+-- Struttura della tabella `categories`
 --
 
-CREATE TABLE `prodotti` (
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `myorder`
+--
+
+DROP TABLE IF EXISTS `myorder`;
+CREATE TABLE `myorder` (
+  `MyOrderId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
   `Id` int(11) NOT NULL,
   `Title` varchar(200) NOT NULL,
   `Description` text DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
-  `Price` decimal(65,2) NOT NULL
+  `Price` decimal(65,2) NOT NULL,
+  `Category` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -58,17 +84,15 @@ CREATE TABLE `prodotti` (
 --
 -- Struttura della tabella `recensioni`
 --
--- Creazione: Nov 28, 2022 alle 09:42
---
 
+DROP TABLE IF EXISTS `recensioni`;
 CREATE TABLE `recensioni` (
   `Id` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
-  `Recensione` text DEFAULT NULL,
-  `Valutazione` int(11) NOT NULL,
-  `Data` datetime NOT NULL,
-  `Verifica` tinyint(1) NOT NULL DEFAULT 0
+  `UserId` int(11) NOT NULL,
+  `Rating` int(11) NOT NULL,
+  `Date` datetime NOT NULL DEFAULT current_timestamp(),
+  `Verify` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,9 +100,8 @@ CREATE TABLE `recensioni` (
 --
 -- Struttura della tabella `utenti`
 --
--- Creazione: Nov 28, 2022 alle 09:43
---
 
+DROP TABLE IF EXISTS `utenti`;
 CREATE TABLE `utenti` (
   `Id` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
@@ -106,19 +129,35 @@ ALTER TABLE `cart`
   ADD KEY `Index_prodotto` (`ProductId`);
 
 --
--- Indici per le tabelle `prodotti`
+-- Indici per le tabelle `categories`
 --
-ALTER TABLE `prodotti`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Title` (`Title`);
+  ADD UNIQUE KEY `Unique_Name` (`Name`);
+
+--
+-- Indici per le tabelle `myorder`
+--
+ALTER TABLE `myorder`
+  ADD PRIMARY KEY (`MyOrderId`),
+  ADD KEY `Index_userId` (`UserId`),
+  ADD KEY `Index_productId` (`ProductId`);
+
+--
+-- Indici per le tabelle `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Unique_Titolo` (`Title`),
+  ADD KEY `Index_category` (`Category`);
 
 --
 -- Indici per le tabelle `recensioni`
 --
 ALTER TABLE `recensioni`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `Index_utente` (`UserId`),
-  ADD KEY `Index_prodotto` (`ProductId`);
+  ADD KEY `Index_utente` (`ProductId`),
+  ADD KEY `Index_rec_utente` (`UserId`);
 
 --
 -- Indici per le tabelle `utenti`
@@ -133,9 +172,21 @@ ALTER TABLE `utenti`
 --
 
 --
--- AUTO_INCREMENT per la tabella `prodotti`
+-- AUTO_INCREMENT per la tabella `categories`
 --
-ALTER TABLE `prodotti`
+ALTER TABLE `categories`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `myorder`
+--
+ALTER TABLE `myorder`
+  MODIFY `MyOrderId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `product`
+--
+ALTER TABLE `product`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -158,15 +209,28 @@ ALTER TABLE `utenti`
 -- Limiti per la tabella `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `myorder`
+--
+ALTER TABLE `myorder`
+  ADD CONSTRAINT `myorder_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `myorder_ibfk_2` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `categories` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `recensioni`
 --
 ALTER TABLE `recensioni`
-  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `prodotti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -23,11 +23,6 @@ SET time_zone = "+00:00";
 USE `s4803351`;
 
 --
--- Svuota la tabella prima dell'inserimento `categories`
---
-
-TRUNCATE TABLE `categories`;
---
 -- Dump dei dati per la tabella `categories`
 --
 
@@ -39,11 +34,6 @@ INSERT INTO `categories` (`Id`, `Name`) VALUES
 (1, 'Technology'),
 (4, 'Vehicle');
 
---
--- Svuota la tabella prima dell'inserimento `product`
---
-
-TRUNCATE TABLE `product`;
 --
 -- Dump dei dati per la tabella `product`
 --

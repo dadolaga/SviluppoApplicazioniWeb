@@ -64,10 +64,6 @@
       <?php require "footer.php" ?>
   </div>
   
-</body>
-
-
-</html>
 <script>
   var disable;
 
@@ -122,3 +118,5 @@
                 }
             }
         </script>
+</body>
+</html>

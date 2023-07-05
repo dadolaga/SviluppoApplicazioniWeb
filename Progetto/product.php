@@ -43,9 +43,11 @@
                 <h3 class="mb-0">'.$row['Title'].'</h3>
                 <div class="mb-1 text-muted">'.$row['Price'].' §</div>
                 <p class="mb-auto">'.$row['Description'].'</p>
+                <form alt="hello">
                 ';
-      include("starRating.php");
-      echo' </div>
+                include("starRating.php");
+      echo' </form>
+            </div>
             </div>';
     }
     ?>

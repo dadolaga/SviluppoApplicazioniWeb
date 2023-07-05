@@ -11,22 +11,12 @@
 
             </ul>
 
-            <div class="input-group mx-auto" style="width: 55%;">
-                <select class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black; color: white !important">
-                    <option style="color: white;">Categories</option>
-                    <option>Offert</option>
-                    <option>Technology</option>
-                    <option>House tools</option>
-                    <option>Fashion</option>
-                    <option>Vehicle</option>
-                    <option>Food</option>
-                    <option>Art</option>
-                </select>
-                <input type="search" class="form-control float-start " data-mdb-filter='true' placeholder="Search..." aria-label="Search">
-                <button type="button" class="btn btn-primary" style="width: 10%; background-color: black; border-color: black; ">
+            <form class="input-group me-auto <?php if(!isset($showSearch)) echo "d-none"; ?>" style="width: 50%;" action="product.php">
+                <input type="search" class="form-control float-start" name="name" data-mdb-filter='true' placeholder="Search..." aria-label="Search">
+                <button type="submit" class="btn btn-primary" style="width: 10%; background-color: black; border-color: black; ">
                     <i class="fa fa-search" style="color:white !important"></i>
                 </button>
-            </div>
+            </form>
 
 
             <div class="col-auto text-end <?php if (isset($_SESSION['Id'])) echo "d-none" ?>" id="login">
@@ -39,13 +29,15 @@
                 <a href="#" class=" link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex;align-items: center;">
                     <img src="image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
                     <?php
-                    $stmt=mysqli_prepare($connection,"SELECT Name FROM utenti WHERE utenti.Id=".$_SESSION["Id"]);
-                    if(!mysqli_stmt_execute($stmt))
-                        echo "Errore nella connessione";
-                    $res=mysqli_stmt_get_result($stmt);//piglio risultato
-                    $row=mysqli_fetch_array($res);//piglio tutta la riga
+                    if (isset($_SESSION['Id'])) {
+                        $stmt = mysqli_prepare($connection, "SELECT Name FROM utenti WHERE utenti.Id=" . $_SESSION["Id"]);
+                        if (!mysqli_stmt_execute($stmt))
+                            echo "Errore nella connessione";
+                        $res = mysqli_stmt_get_result($stmt); //piglio risultato
+                        $row = mysqli_fetch_array($res); //piglio tutta la riga
 
-                    echo "<div class='truncate float-start mt-1'> Hello " .$row["Name"]. "</div>"; //per scrivere nome
+                        echo "<div class='truncate float-start mt-1'> Hello " . $row["Name"] . "</div>"; //per scrivere nome
+                    } 
                     ?>
                 </a>
 

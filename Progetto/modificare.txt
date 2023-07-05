@@ -1,7 +1,5 @@
 fare recensioni medie lista prodotti 
-mettere categorie cliccabili
-fare cerca
 
 fare i vari controlli (email, password ecc)
 
-caricamento sito figo
+togliere errori con wave

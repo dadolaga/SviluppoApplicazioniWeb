@@ -4,7 +4,10 @@
     <style> 
       #login{display: none;}
     </style>
-        <?php require "connection.php"; //se non trova file da errore
+        <?php 
+        $loginNotRequired = true;
+      
+        require "connection.php"; //se non trova file da errore
         require "include.php";
             if(isset($_POST["firstname"])){ //se riceve qualcosa con POST dobbiamo registrarlo
                 $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));

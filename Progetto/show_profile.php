@@ -6,7 +6,7 @@
             require "include.php";
             if (isset($_SESSION['Id'])){
                 $Id=$_SESSION['Id'];
-                $stmt=mysqli_prepare($connection,"SELECT * FROM utenti WHERE utenti.Id='$Id'");
+                $stmt=mysqli_prepare($connection,"SELECT * FROM user WHERE user.Id='$Id'");
                 if(!mysqli_stmt_execute($stmt))
                     echo "Errore nella connessione";
                 $res=mysqli_stmt_get_result($stmt);//piglio risultato

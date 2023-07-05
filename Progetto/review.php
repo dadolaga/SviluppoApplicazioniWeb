@@ -23,7 +23,7 @@
 
     $array_id=array();
     while(($row=mysqli_fetch_array($res))!=NULL){
-      $stmt=mysqli_prepare($connection,"SELECT Rating FROM recensioni WHERE UserId=? AND ProductId=?;");
+      $stmt=mysqli_prepare($connection,"SELECT Rating FROM review WHERE UserId=? AND ProductId=?;");
       mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $row['Id']);
       mysqli_stmt_execute($stmt);
       $res_rating=mysqli_stmt_get_result($stmt);

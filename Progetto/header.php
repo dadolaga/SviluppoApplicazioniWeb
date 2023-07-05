@@ -30,7 +30,7 @@
                     <img src="image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
                     <?php
                     if (isset($_SESSION['Id'])) {
-                        $stmt = mysqli_prepare($connection, "SELECT Name FROM utenti WHERE utenti.Id=" . $_SESSION["Id"]);
+                        $stmt = mysqli_prepare($connection, "SELECT Name FROM user WHERE user.Id=" . $_SESSION["Id"]);
                         if (!mysqli_stmt_execute($stmt))
                             echo "Errore nella connessione";
                         $res = mysqli_stmt_get_result($stmt); //piglio risultato

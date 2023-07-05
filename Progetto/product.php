@@ -19,7 +19,7 @@
   <div class="container">
     <?php
     
-    $stmt=mysqli_prepare($connection,"SELECT product.*, AVG(recensioni.Rating) AS rating FROM product LEFT JOIN recensioni ON product.Id = recensioni.ProductId WHERE Title LIKE ? GROUP BY product.Id");
+    $stmt=mysqli_prepare($connection,"SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId WHERE Title LIKE ? GROUP BY product.Id");
     
     if(isset($_GET['name']))
       $name = "%" . $_GET['name'] . "%";

@@ -20,7 +20,7 @@
                 $email=mysqli_real_escape_string($connection,trim($_POST['email']));
                 $password=mysqli_real_escape_string($connection,trim($_POST['pass']));
 
-                $stmt=mysqli_prepare($connection,"SELECT Id,Name,Password FROM utenti WHERE utenti.Email='$email'");
+                $stmt=mysqli_prepare($connection,"SELECT Id,Name,Password FROM user WHERE user.Email='$email'");
                 if(!mysqli_stmt_execute($stmt))
                     echo "Errore nella connessione";
                 $res=mysqli_stmt_get_result($stmt);//piglio risultato

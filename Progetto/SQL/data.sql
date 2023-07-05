@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 27, 2023 alle 11:57
+-- Creato il: Lug 05, 2023 alle 16:51
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 USE `s4803351`;
 
 --
--- Dump dei dati per la tabella `categories`
+-- Dump dei dati per la tabella `category`
 --
 
-INSERT INTO `categories` (`Id`, `Name`) VALUES
+INSERT INTO `category` (`Id`, `Name`) VALUES
 (6, 'Art'),
 (3, 'Fashion'),
 (5, 'Food'),

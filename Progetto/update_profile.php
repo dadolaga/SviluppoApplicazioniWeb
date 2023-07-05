@@ -39,7 +39,7 @@
         else
             $social = "\"$social\"";
 
-        $query = "UPDATE utenti SET Name=$firstname, Surname=$lastname, Email=$email, Username=$username, Residence=$residance, BornDate=$born, SocialWeb=$linkweb, Social=$social WHERE Id=".$_SESSION['Id'];
+        $query = "UPDATE user SET Name=$firstname, Surname=$lastname, Email=$email, Username=$username, Residence=$residance, BornDate=$born, SocialWeb=$linkweb, Social=$social WHERE Id=".$_SESSION['Id'];
 
         if(mysqli_query($connection, $query) == false)
             echo "Errore nella registrazione";

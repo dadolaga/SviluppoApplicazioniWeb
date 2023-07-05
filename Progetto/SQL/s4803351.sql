@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 27, 2023 alle 11:53
+-- Creato il: Lug 05, 2023 alle 16:49
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -28,8 +28,10 @@ USE `s4803351`;
 --
 -- Struttura della tabella `cart`
 --
+-- Creazione: Apr 18, 2023 alle 13:51
+-- Ultimo aggiornamento: Lug 01, 2023 alle 16:43
+--
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
@@ -39,11 +41,12 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `categories`
+-- Struttura della tabella `category`
+--
+-- Creazione: Dic 19, 2022 alle 11:21
 --
 
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE `categories` (
+CREATE TABLE `category` (
   `Id` int(11) NOT NULL,
   `Name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -53,8 +56,10 @@ CREATE TABLE `categories` (
 --
 -- Struttura della tabella `myorder`
 --
+-- Creazione: Giu 16, 2023 alle 13:23
+-- Ultimo aggiornamento: Lug 01, 2023 alle 16:43
+--
 
-DROP TABLE IF EXISTS `myorder`;
 CREATE TABLE `myorder` (
   `MyOrderId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
@@ -68,8 +73,9 @@ CREATE TABLE `myorder` (
 --
 -- Struttura della tabella `product`
 --
+-- Creazione: Apr 18, 2023 alle 13:58
+--
 
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `Id` int(11) NOT NULL,
   `Title` varchar(200) NOT NULL,
@@ -82,11 +88,13 @@ CREATE TABLE `product` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recensioni`
+-- Struttura della tabella `review`
+--
+-- Creazione: Giu 19, 2023 alle 10:24
+-- Ultimo aggiornamento: Lug 01, 2023 alle 16:44
 --
 
-DROP TABLE IF EXISTS `recensioni`;
-CREATE TABLE `recensioni` (
+CREATE TABLE `review` (
   `Id` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
@@ -98,11 +106,13 @@ CREATE TABLE `recensioni` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Struttura della tabella `user`
+--
+-- Creazione: Apr 18, 2023 alle 14:04
+-- Ultimo aggiornamento: Lug 01, 2023 alle 16:26
 --
 
-DROP TABLE IF EXISTS `utenti`;
-CREATE TABLE `utenti` (
+CREATE TABLE `user` (
   `Id` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
   `Surname` varchar(50) NOT NULL,
@@ -129,9 +139,9 @@ ALTER TABLE `cart`
   ADD KEY `Index_prodotto` (`ProductId`);
 
 --
--- Indici per le tabelle `categories`
+-- Indici per le tabelle `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Unique_Name` (`Name`);
 
@@ -152,17 +162,17 @@ ALTER TABLE `product`
   ADD KEY `Index_category` (`Category`);
 
 --
--- Indici per le tabelle `recensioni`
+-- Indici per le tabelle `review`
 --
-ALTER TABLE `recensioni`
+ALTER TABLE `review`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Index_utente` (`ProductId`),
   ADD KEY `Index_rec_utente` (`UserId`);
 
 --
--- Indici per le tabelle `utenti`
+-- Indici per le tabelle `user`
 --
-ALTER TABLE `utenti`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Unique_Email` (`Email`),
   ADD UNIQUE KEY `Unique_Username` (`Username`);
@@ -172,9 +182,9 @@ ALTER TABLE `utenti`
 --
 
 --
--- AUTO_INCREMENT per la tabella `categories`
+-- AUTO_INCREMENT per la tabella `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -190,15 +200,15 @@ ALTER TABLE `product`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `recensioni`
+-- AUTO_INCREMENT per la tabella `review`
 --
-ALTER TABLE `recensioni`
+ALTER TABLE `review`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `utenti`
+-- AUTO_INCREMENT per la tabella `user`
 --
-ALTER TABLE `utenti`
+ALTER TABLE `user`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -210,27 +220,27 @@ ALTER TABLE `utenti`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `myorder`
 --
 ALTER TABLE `myorder`
-  ADD CONSTRAINT `myorder_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `myorder_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `myorder_ibfk_2` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `categories` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `recensioni`
+-- Limiti per la tabella `review`
 --
-ALTER TABLE `recensioni`
-  ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recensioni_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `utenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

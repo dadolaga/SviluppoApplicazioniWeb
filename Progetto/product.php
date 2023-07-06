@@ -12,6 +12,10 @@
   ?>
   <link href="styleStar.css" rel="stylesheet">
 
+  <style> 
+  .container{ width: 60%;}
+  </style> 
+
 </head>
 
 <body>
@@ -43,10 +47,10 @@
                 <h3 class="mb-0">'.$row['Title'].'</h3>
                 <div class="mb-1 text-muted">'.$row['Price'].' §</div>
                 <p class="mb-auto">'.$row['Description'].'</p>
-                <form alt="hello">
-                ';
+                <form > <fieldset disabled> '; //fieldset disabilita tutto form stelline in product
                 include("starRating.php");
-      echo' </form>
+      echo' </fieldset>
+            </form>
             </div>
             </div>';
     }

@@ -36,6 +36,8 @@
     }
 
   </style>
+    <link href="styleStar.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -44,12 +46,13 @@
     <div id="carouselProducts" class="carousel slide mb-4" data-bs-ride="carousel">
       <div class="carousel-inner">
         <?php
-          $stmt=mysqli_prepare($connection,"SELECT * FROM product ORDER BY RAND() LIMIT 3");
+          $stmt=mysqli_prepare($connection,"SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId  GROUP BY product.Id ORDER BY RAND() LIMIT 3");
           if(!mysqli_stmt_execute($stmt))
               echo "Errore nella connessione";
           $res=mysqli_stmt_get_result($stmt);//piglio risultato
           $active = "active";
           while(($row=mysqli_fetch_array($res))!=NULL){
+            $rating_value = round($row['rating']);
             echo '<div class="carousel-item '.$active.'">
               <div class="card flex-md-row box-shadow h-md-250">
                 <img class="card-img-left flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;   border-top-left-radius: 50px; border-bottom-left-radius: 50px;" src="product/'.$row['Id'].'.jpg" data-holder-rendered="true">
@@ -57,8 +60,9 @@
                   <h3 class="mb-3">
                     <a class="text-dark" href="singleProduct.php?id='.$row['Id'].'">'.$row['Title'].'</a>
                   </h3>
-                  <div class="mb-2">'.$row['Price'].' §</div>
-                </div>
+                  <div class="mb-2">'.$row['Price'].' §</div>';
+                  include("starRatingSingle.php");
+            echo' </div>
               </div>
             </div>';
             $active = "";

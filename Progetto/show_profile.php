@@ -17,8 +17,6 @@
                 $USERNAME=htmlentities($row['Username']);
                 $RESIDANCE=htmlentities($row['Residence']);
                 $BORN=htmlentities($row['BornDate']);
-                $LINKWEB=htmlentities($row['SocialWeb']);
-                $SOCIAL=htmlentities($row['Social']);
             }
         ?>
     </head>
@@ -52,14 +50,7 @@
             <input type="date" class="form-control" name="born" id="floatingBorn" placeholder="Born" value=<?php echo $BORN; ?>>
             <label for="floatingBorn">Born</label>
           </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="linkweb" id="floatingLink" placeholder="Linkweb"value=<?php echo $LINKWEB; ?>>
-            <label for="floatingLink">Link Web</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="social" id="floatingSocial" placeholder="Social" value=<?php echo $SOCIAL; ?>>
-            <label for="floatingSocial">Social</label>
-          </div>
+          
           <input type="submit" name="submit" value="modification" class="w-100 btn btn-lg btn-primary">
           <hr class="my-4">
           <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>

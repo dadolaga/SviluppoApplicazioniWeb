@@ -9,6 +9,10 @@
   ?>
   <link href="styleStar.css" rel="stylesheet">
 
+  <style> 
+  .container{ width: 60%;}
+  </style> 
+
 </head>
 
 <body>
@@ -33,9 +37,10 @@
         $rating_value=$row_rating[0];
         $button_disabled="disabled";
       }
+       
       array_push($array_id,$row['Id']);
       echo '<form action="addReview.php" method="GET">
-              <div class="row mx-5 border rounded mb-4 bg-white position-relative">
+              <div class="row border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
               <img src="product/'.$row['Id'].'.jpg" width="200" height="250">  
               </div>

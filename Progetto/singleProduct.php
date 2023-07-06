@@ -10,12 +10,15 @@
   if(isset($_GET["id"])){
     $id = mysqli_real_escape_string($connection, $_GET['id']);
 
-    $stmt=mysqli_prepare($connection,"SELECT * FROM product WHERE id=$id");
+    $stmt=mysqli_prepare($connection,"SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId WHERE product.Id=? GROUP BY product.Id");
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+
+
     if(!mysqli_stmt_execute($stmt))
         echo "Errore nella connessione";
     $res=mysqli_stmt_get_result($stmt);//piglio risultato
     $rowProduct=mysqli_fetch_array($res);//piglio tutta la riga
-
+    $rating_value = round($rowProduct['rating']);
   }
   ?>
   <link href="styleStar.css" rel="stylesheet">

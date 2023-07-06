@@ -1,11 +1,5 @@
-fare recensioni medie lista prodotti 
-
 fare i vari controlli (email, password ecc)
 
 togliere errori con wave
 
 controllare utente loggato ma nome non esiste in DB
-
-disabilitare valutazione nei prodotti
-
-mettere stelline recensione in singolo prodotto

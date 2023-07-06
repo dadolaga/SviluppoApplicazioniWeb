@@ -74,14 +74,6 @@
     animation-name: starFill;
 }
 
-.rating__input-1:not(:checked):hover ~ .rating__label:first-of-type .rating__star-fill, 
-.rating__input-2:not(:checked):hover ~ .rating__label:nth-of-type(2) .rating__star-fill, 
-.rating__input-3:not(:checked):hover ~ .rating__label:nth-of-type(3) .rating__star-fill, 
-.rating__input-4:not(:checked):hover ~ .rating__label:nth-of-type(4) .rating__star-fill, 
-.rating__input-5:not(:checked):hover ~ .rating__label:nth-of-type(5) .rating__star-fill {
-    fill: var(--yellow-t);
-}
-
 /*dimensione animazioni*/
 @keyframes starFill {
     from, 40% {

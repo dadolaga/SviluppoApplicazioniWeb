@@ -1,12 +1,16 @@
 <main class="form-signin w-100">
             <form class="rating__stars" id="rating_form" onmouseenter="disableWindowsOpen();" onmouseleave="enableWindowsOpen();">
                 <!--identificare le valutazioni -->
-                <input id="rating-1" class="rating__input rating__input-1" type="radio" name="rating" value="1">
-                <input id="rating-2" class="rating__input rating__input-2" type="radio" name="rating" value="2">
-                <input id="rating-3" class="rating__input rating__input-3" type="radio" name="rating" value="3">
-                <input id="rating-4" class="rating__input rating__input-4" type="radio" name="rating" value="4">
-                <input id="rating-5" class="rating__input rating__input-5" type="radio" name="rating" value="5">
-                
+                <input id="rating-1" class="rating__input rating__input-1" type="radio" name="rating" value="1"required 
+                <?php if($rating_value==1) echo ("checked")?> disabled>
+                <input id="rating-2" class="rating__input rating__input-2" type="radio" name="rating" value="2"
+                <?php if($rating_value==2) echo ("checked")?> disabled>
+                <input id="rating-3" class="rating__input rating__input-3" type="radio" name="rating" value="3"
+                <?php if($rating_value==3) echo ("checked")?> disabled>
+                <input id="rating-4" class="rating__input rating__input-4" type="radio" name="rating" value="4"
+                <?php if($rating_value==4) echo ("checked")?> disabled>
+                <input id="rating-5" class="rating__input rating__input-5" type="radio" name="rating" value="5"
+                <?php if($rating_value==5) echo ("checked")?> disabled>
                 <?php
                     for($i=1;$i<=5;$i++){
                         echo'

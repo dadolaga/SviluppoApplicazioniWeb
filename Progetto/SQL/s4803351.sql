@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 05, 2023 alle 16:49
+-- Creato il: Lug 07, 2023 alle 18:48
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -29,7 +29,6 @@ USE `s4803351`;
 -- Struttura della tabella `cart`
 --
 -- Creazione: Apr 18, 2023 alle 13:51
--- Ultimo aggiornamento: Lug 01, 2023 alle 16:43
 --
 
 CREATE TABLE `cart` (
@@ -41,23 +40,9 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `category`
---
--- Creazione: Dic 19, 2022 alle 11:21
---
-
-CREATE TABLE `category` (
-  `Id` int(11) NOT NULL,
-  `Name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `myorder`
 --
 -- Creazione: Giu 16, 2023 alle 13:23
--- Ultimo aggiornamento: Lug 01, 2023 alle 16:43
 --
 
 CREATE TABLE `myorder` (
@@ -73,7 +58,7 @@ CREATE TABLE `myorder` (
 --
 -- Struttura della tabella `product`
 --
--- Creazione: Apr 18, 2023 alle 13:58
+-- Creazione: Lug 06, 2023 alle 10:21
 --
 
 CREATE TABLE `product` (
@@ -81,8 +66,7 @@ CREATE TABLE `product` (
   `Title` varchar(200) NOT NULL,
   `Description` text DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
-  `Price` decimal(65,2) NOT NULL,
-  `Category` int(11) NOT NULL DEFAULT 1
+  `Price` decimal(65,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -91,7 +75,6 @@ CREATE TABLE `product` (
 -- Struttura della tabella `review`
 --
 -- Creazione: Giu 19, 2023 alle 10:24
--- Ultimo aggiornamento: Lug 01, 2023 alle 16:44
 --
 
 CREATE TABLE `review` (
@@ -108,8 +91,7 @@ CREATE TABLE `review` (
 --
 -- Struttura della tabella `user`
 --
--- Creazione: Apr 18, 2023 alle 14:04
--- Ultimo aggiornamento: Lug 01, 2023 alle 16:26
+-- Creazione: Lug 06, 2023 alle 10:19
 --
 
 CREATE TABLE `user` (
@@ -119,11 +101,8 @@ CREATE TABLE `user` (
   `Email` varchar(319) NOT NULL,
   `Username` varchar(250) DEFAULT NULL,
   `Password` varchar(72) NOT NULL,
-  `HashPass` varchar(100) NOT NULL,
   `Residence` varchar(50) DEFAULT NULL,
-  `BornDate` date DEFAULT NULL,
-  `SocialWeb` text DEFAULT NULL,
-  `Social` text DEFAULT NULL
+  `BornDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -139,13 +118,6 @@ ALTER TABLE `cart`
   ADD KEY `Index_prodotto` (`ProductId`);
 
 --
--- Indici per le tabelle `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Name` (`Name`);
-
---
 -- Indici per le tabelle `myorder`
 --
 ALTER TABLE `myorder`
@@ -158,8 +130,7 @@ ALTER TABLE `myorder`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Unique_Titolo` (`Title`),
-  ADD KEY `Index_category` (`Category`);
+  ADD UNIQUE KEY `Unique_Titolo` (`Title`);
 
 --
 -- Indici per le tabelle `review`
@@ -180,12 +151,6 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
-
---
--- AUTO_INCREMENT per la tabella `category`
---
-ALTER TABLE `category`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `myorder`
@@ -228,12 +193,6 @@ ALTER TABLE `cart`
 ALTER TABLE `myorder`
   ADD CONSTRAINT `myorder_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `myorder_ibfk_2` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `review`

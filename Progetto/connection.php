@@ -5,10 +5,12 @@
         if(!isset($loginNotRequired))
             echo "<script> alert('You must be logged'); window.open('index.php', '_self'); </script>";
 
+    mysqli_report(MYSQLI_REPORT_OFF);
+    /* @ is used to suppress warnings */
     $connection=mysqli_connect("localhost","root","","S4803351"); //IP server scuola
-    if (mysqli_connect_errno())
-        echo "Riprovare più tardi";
-        //controllare file log
-
-    
+    if (!$connection) {
+        /* Use your preferred error logging method here */
+        error_log('Connection error: ' . mysqli_connect_error());
+        header("location: executeError.php");
+    }
 ?>

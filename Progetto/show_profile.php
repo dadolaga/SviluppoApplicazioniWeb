@@ -53,7 +53,7 @@
           
           <input type="submit" name="submit" value="modification" class="w-100 btn btn-lg btn-primary">
           <hr class="my-4">
-          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+          <small class="text-muted">By clicking Modification, you agree to the terms of use.</small>
         </form>
       </div>
         </main>

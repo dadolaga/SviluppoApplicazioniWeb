@@ -32,6 +32,6 @@
         if(mysqli_query($connection, $query) == false)
             echo "Errore nella registrazione";
         else 
-            header("location: index.php");
+            header("location: homepage.php");
     }
 ?>

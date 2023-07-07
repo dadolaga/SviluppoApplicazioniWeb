@@ -1,20 +1,21 @@
 <header class="p-3 mb-3 border-bottom " style="--bs-border-color: black;">
         <div class="d-flex justify-content-between mx-3 align-items-center">
             <div class="d-flex align-items-center">
-                <a href="index.php" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                    <img src="image/logo.jpg" height="50" width="50">
+                <a href="homepage.php" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img src="image/logo.jpg" height="50" width="50" alt="Logo">
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="color: black;">
-                    <li><a href="index.php" class="nav-link px-2 "> Home </a></li>
+                    <li><a href="homepage.php" class="nav-link px-2 "> Home </a></li>
                     <li><a href="product.php" class="nav-link px-2 "> Products </a></li>
                 </ul>
             </div>
 
             <form class="input-group <?php if(!isset($showSearch)) echo "d-none"; ?>" style="width: 50%;" action="product.php">
                 <input type="search" class="form-control float-start" name="name" placeholder="Search..." value="<?php if(isset($_GET['name'])) echo($_GET['name'])?>">
-                <button type="submit" class="btn btn-primary" style="width: 10%; background-color: black; border-color: black; ">
+                <button type="submit" class="btn btn-primary" style="width: 10%; background-color: black; border-color: black;" value="search">
                     <i class="fa fa-search" style="color:white !important"></i>
+                    
                 </button>
             </form>
 
@@ -41,7 +42,7 @@
                 </a>
 
                 <ul class="dropdown-menu text-small float-start ">
-                    <li><a class="dropdown-item" href="ShoppingBag.php">Alien Bag</a></li>
+                    <li><a class="dropdown-item" href="shoppingBag.php">Alien Bag</a></li>
                     <li><a class="dropdown-item" href="show_profile.php">Profile</a></li><!--profilo utente stile insta + edit profile-->
                     <li><a class="dropdown-item" href="review.php">Reviews</a></li><!--recensioni-->
 

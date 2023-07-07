@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Product</title>
+  <title>Singol product</title>
   <?php
   require "connection.php";
   require "include.php";

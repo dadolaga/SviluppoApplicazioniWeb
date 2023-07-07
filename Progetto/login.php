@@ -31,7 +31,7 @@
                     $_SESSION['Id'] = $row['Id'];
                     $_SESSION['name']=$row['Name'];
                     $_SESSION['password']=$password;
-                    header("Location: index.php");
+                    header("Location: homepage.php");
                 }
                 else {
                   $no_log= "style= 'display: block'";

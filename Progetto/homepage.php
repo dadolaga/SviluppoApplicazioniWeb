@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Bootstrap Example</title>
+  <title>Homepage</title>
   <?php
   $loginNotRequired = true;
   require "connection.php";
@@ -60,9 +60,12 @@
                   <h3 class="mb-3">
                     <a class="text-dark" href="singleProduct.php?id='.$row['Id'].'">'.$row['Title'].'</a>
                   </h3>
-                  <div class="mb-2">'.$row['Price'].' §</div>';
-                  include("starRatingSingle.php");
-            echo' </div>
+                  <div class="mb-2">'.$row['Price'].' §</div>
+                  <form> <fieldset disabled>';
+                  include("starRating.php");
+            echo' </fieldset>
+              </form>
+              </div>
               </div>
             </div>';
             $active = "";
@@ -75,9 +78,9 @@
       <div class="col-6 text-center">
         <h2>Evaluate your purchase:</h2>
         <div class="">
-            <a href="review.php"><img src="image/house.png" height="150" width="150"></a>
+            <a href="review.php"><img src="image/house.png" alt="review" height="150" width="150"></a>
           <div class="caption">
-            <img src="image/stars.png" height="70" width="70"> <!-- Da riposizionare -->
+            <img src="image/stars.png" alt="star" height="70" width="70"> <!-- Da riposizionare -->
           </div>
         </div>
       </div>
@@ -85,7 +88,7 @@
       <div class="col-6 text-center">
         <h2>Shopping cart:</h2>
         <div class="">
-          <a href="ShoppingBag.php"><img class="rounded-circle" src="image/alien-shopping.jpg" height="200" width="200"></a>
+          <a href="ShoppingBag.php"><img class="rounded-circle" src="image/alien-shopping.jpg" alt="Bag" height="200" width="200"></a>
         </div>
       </div>
     </div>

@@ -4,10 +4,10 @@
 <head>
   <title>Review</title>
   <?php
-    require "connection.php";
-    require "include.php";
+    require "../home/connection.php";
+    require "../home/include.php";
   ?>
-  <link href="styleStar.css" rel="stylesheet">
+  <link href="../style/styleStar.css" rel="stylesheet">
 
   <style> 
   .container{ width: 60%;}
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <?php require "header.php";?>
+  <?php require "../home/header.php";?>
   <div class="container">
     <?php
     $offset=0;
@@ -39,10 +39,10 @@
       }
        
       array_push($array_id,$row['Id']);
-      echo '<form action="addReview.php" method="GET">
+      echo '<form action="../review/add../review/review.php" method="GET">
               <div class="row border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
-              <img src="product/'.$row['Id'].'.jpg" alt="'.$row['Title'].'" width="200" height="250">  
+              <img src="../image/product/'.$row['Id'].'.jpg" alt="'.$row['Title'].'" width="200" height="250">  
               </div>
               
               <div class="row col p-4">
@@ -56,7 +56,7 @@
 
                   <input type="hidden" name="id" value="'.$row['Id'].'"> </input>
                 ';
-                include("starRating.php");
+                include("../home/starRating.php");
                 
       echo' </div>
             </div>
@@ -65,7 +65,7 @@
     ?>
     
     
-      <?php require "footer.php" ?>
+      <?php require "../home/footer.php" ?>
   </div>
   
 </body>

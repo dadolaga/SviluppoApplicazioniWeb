@@ -12,8 +12,8 @@
         <?php 
         $loginNotRequired = true;
         
-        require "connection.php"; //se non trova file da errore
-        require "include.php";
+        require "../home/connection.php"; //se non trova file da errore
+        require "../home/include.php";
         $no_log= "style= 'display: none'";
 
             if(isset($_POST["email"]) && isset($_POST["pass"])){ 
@@ -31,7 +31,7 @@
                     $_SESSION['Id'] = $row['Id'];
                     $_SESSION['name']=$row['Name'];
                     $_SESSION['password']=$password;
-                    header("Location: homepage.php");
+                    header("Location: ../home/homepage.php");
                 }
                 else {
                   $no_log= "style= 'display: block'";
@@ -40,7 +40,7 @@
         ?>
     </head>
     <body>
-        <?php require "header.php";?>
+        <?php require "../home/header.php";?>
 
         <main class="form-signin w-100">
         <div class="col-md-10 m-auto col-lg-5" >

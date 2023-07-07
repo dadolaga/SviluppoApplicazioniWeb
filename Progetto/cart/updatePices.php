@@ -1,6 +1,6 @@
 <?php 
-    require "connection.php"; //se non trova file da errore
-    require "include.php";
+    require "../home/connection.php"; //se non trova file da errore
+    require "../home/include.php";
 	
     if (isset($_GET["id"]) && isset($_GET["Pezzi"])) { //se riceve qualcosa con POST dobbiamo registrarlo
         $id = mysqli_real_escape_string($connection, trim($_GET['id']));

@@ -4,8 +4,8 @@
 <head>
   <title>Singol product</title>
   <?php
-  require "connection.php";
-  require "include.php";
+  require "../home/connection.php";
+  require "../home/include.php";
 
   if(isset($_GET["id"])){
     $id = mysqli_real_escape_string($connection, $_GET['id']);
@@ -21,18 +21,18 @@
     $rating_value = round($rowProduct['rating']);
   }
   ?>
-  <link href="styleStar.css" rel="stylesheet">
+  <link href="../style/styleStar.css" rel="stylesheet">
 </head>
 
 <body>
-  <?php require "header.php";?>
+  <?php require "../home/header.php";?>
   <div class="container">
   <div class="card">
         <div class="card-body">
             <h3><?php echo $rowProduct['Title'];?></h3>
             <div class="row">
                 <div class="col-3">
-                    <div class="white-box text-center"><img src="product/<?php echo $rowProduct['Id'];?>.jpg" style="width: 100%;" class="img-responsive"></div>
+                    <div class="white-box text-center"><img src="../image/product/<?php echo $rowProduct['Id'];?>.jpg" style="width: 100%;" class="img-responsive"></div>
                 </div>
                 <div class="col-9" style="padding: 0 7rem;">
                     <h4 class="box-title">Product description</h4>
@@ -41,14 +41,14 @@
                       <?php echo $rowProduct['Price'];?> §
                     </h2>
                     <?php
-                      include("starRatingSingle.php");
+                      include("../home/starRatingSingle.php");
                     ?>
-                    <button class="btn btn-primary btn-rounded" onclick="window.open('addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
+                    <button class="btn btn-primary btn-rounded" onclick="window.open('../cart/addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
                 </div>
             </div>
         </div>
     </div>
-      <?php require "footer.php" ?>
+      <?php require "../home/footer.php" ?>
   </div>
   
 </body>

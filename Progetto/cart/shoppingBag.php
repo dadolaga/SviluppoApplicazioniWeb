@@ -5,8 +5,8 @@
 	<?php
 	//quando prodotto viene acquistato automaticamente appare 
 	//la quantità prelevata in stock quindi non viene gestita la decrementazione nel DB
-	require "connection.php";
-	require "include.php";
+	require "../home/connection.php";
+	require "../home/include.php";
 	if (!empty($_POST)) {
 		$key = array_keys($_POST);
 		for ($i = 0; $i < count($key); $i++) {
@@ -24,11 +24,11 @@
 	}
 
 	?>
-	<link href="completeOrder.css" rel="stylesheet">
+	<link href="../style/completeOrder.css" rel="stylesheet">
 </head>
 
 <body>
-	<?php require "header.php"; ?>
+	<?php require "../home/header.php"; ?>
 
 	<div class="container">
 		<div class="row d-flex justify-content-center my-4">
@@ -53,7 +53,7 @@
 								<div class="col-3 ">
 								<!-- Image -->
 									<div class="bg-image hover-overlay ripple rounded" >
-										<img class="w-100" src="product/' . $row['Id'] . '.jpg" onclick="window.open(\'singleProduct.php?id=' . $row['Id'] . '\', \'_self\')"/>
+										<img class="w-100" src="../image/product/' . $row['Id'] . '.jpg" onclick="window.open(\'../product/singleProduct.php?id=' . $row['Id'] . '\', \'_self\')"/>
 									</div>
 								<!-- Image -->
 								</div>

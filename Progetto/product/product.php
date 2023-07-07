@@ -5,12 +5,12 @@
   <title>Product</title>
   <?php
   $loginNotRequired = true;
-  require "connection.php";
-  require "include.php";
+  require "../home/connection.php";
+  require "../home/include.php";
 
   $showSearch = true;
   ?>
-  <link href="styleStar.css" rel="stylesheet">
+  <link href="../style/styleStar.css" rel="stylesheet">
 
   <style> 
   .container{ width: 60%;}
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <?php require "header.php";?>
+  <?php require "../home/header.php";?>
   <div class="container">
     <?php
     
@@ -41,14 +41,14 @@
       array_push($array_id,$row['Id']);
       echo '<div class="row border rounded mb-4 bg-white position-relative" onclick="openWindow('.$row['Id'].')">
               <div class="col-auto p-0 rounded">
-              <img src="product/'.$row['Id'].'.jpg" alt="'.$row['Title'].'" width="200" height="250">  
+              <img src="../image/product/'.$row['Id'].'.jpg" alt="'.$row['Title'].'" width="200" height="250">  
               </div>
               <div class="col p-4">
                 <h3 class="mb-0">'.$row['Title'].'</h3>
                 <div class="mb-1 text-muted">'.$row['Price'].' §</div>
                 <p class="mb-auto">'.$row['Description'].'</p>
                 <form > <fieldset disabled> '; //fieldset disabilita tutto form stelline in product
-                include("starRating.php");
+                include("../home/starRating.php");
       echo' </fieldset>
             </form>
             </div>
@@ -56,7 +56,7 @@
     }
     ?>
     
-      <?php require "footer.php" ?>
+      <?php require "../home/footer.php" ?>
   </div>
   
 </body>
@@ -75,6 +75,6 @@
 
   function openWindow(id){
     if(!disable) 
-      window.open('singleProduct.php?id='+id, '_self'); 
+      window.open('../product/singleProduct.php?id='+id, '_self'); 
   }
 </script>

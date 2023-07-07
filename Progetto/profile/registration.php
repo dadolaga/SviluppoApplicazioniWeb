@@ -7,8 +7,8 @@
         <?php 
         $loginNotRequired = true;
       
-        require "connection.php"; //se non trova file da errore
-        require "include.php";
+        require "../home/connection.php"; //se non trova file da errore
+        require "../home/include.php";
             if(isset($_POST["firstname"])){ //se riceve qualcosa con POST dobbiamo registrarlo
                 $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));
                 $lastname=mysqli_real_escape_string($connection,trim($_POST['lastname']));
@@ -29,14 +29,14 @@
                     echo "Errore nella registrazione";
                 else {
                   echo "Utente registrato"; 
-                  header("Location: login.php");
+                  header("Location: ../profile/login.php");
                 }
 
             }
         ?>
     </head>
     <body>
-        <?php require "header.php";?>
+        <?php require "../home/header.php";?>
 
         <main class="form-signin w-100 my-5">
         <div class="col-md-10 m-auto col-lg-5">

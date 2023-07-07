@@ -1,5 +1,5 @@
 <?php
-    require "connection.php";
+    require "../home/connection.php";
     if($_POST){
 
         $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));
@@ -32,6 +32,6 @@
         if(mysqli_query($connection, $query) == false)
             echo "Errore nella registrazione";
         else 
-            header("location: homepage.php");
+            header("location: ../home/homepage.php");
     }
 ?>

@@ -1,5 +1,5 @@
 <a id="GoOnTop" href="#" aria-hidden="true" data-bs-toggle="backtotop" class="back-to-top" style="position: fixed; bottom: 16px; right: 16px; display:none">
-    <img src="image/arrow-up.png" alt="go on top" height="50" width="50">
+    <img src="../image/arrow-up.png" alt="go on top" height="50" width="50">
 </a>
 <footer class="py-5" style="margin-top: 100px;">
     <div class="d-flex justify-content-around">
@@ -29,4 +29,4 @@
       <p>© 2022 Company, Inc. All rights reserved.</p>
     </div>
   </footer>
-  <script src="script.js"></script>
+  <script src="../script/script.js"></script>

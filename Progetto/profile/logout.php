@@ -1,5 +1,5 @@
 <?php
-    require "connection.php";
+    require "../home/connection.php";
     if(isset($_SESSION['Id'])) {
     
         $_SESSION = []; // Reset dell'array di sessione
@@ -10,6 +10,6 @@
         }
         session_destroy(); // Chiusura sessione
     } 
-    header('Location: login.php'); // Reindirizzamento
+    header('Location: ../profile/login.php'); // Reindirizzamento
     exit; // Fine script
 ?>

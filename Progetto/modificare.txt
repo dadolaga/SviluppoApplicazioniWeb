@@ -11,3 +11,5 @@ dividere file in cartelle
 identare pagine / controllare div
 
 caricare su server
+
+no grafica aggiunta al carrello

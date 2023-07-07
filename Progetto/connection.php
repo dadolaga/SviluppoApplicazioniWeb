@@ -3,7 +3,7 @@
 
     if(!isset($_SESSION['Id']))
         if(!isset($loginNotRequired))
-            echo "<script> alert('You must be logged'); window.open('index.php', '_self'); </script>";
+            echo "<script> alert('You must be logged'); window.open('homepage.php', '_self'); </script>";
 
     mysqli_report(MYSQLI_REPORT_OFF);
     /* @ is used to suppress warnings */

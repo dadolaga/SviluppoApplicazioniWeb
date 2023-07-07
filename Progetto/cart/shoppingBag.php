@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="EN">
+
 <head>
 	<title>Shopping bag</title>
 	<?php

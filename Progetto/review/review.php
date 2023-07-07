@@ -4,69 +4,72 @@
 <head>
   <title>Review</title>
   <?php
-    require "../home/connection.php";
-    require "../home/include.php";
+  require "../home/connection.php";
+  require "../home/include.php";
   ?>
   <link href="../style/styleStar.css" rel="stylesheet">
 
-  <style> 
-  .container{ width: 60%;}
-  </style> 
+  <style>
+    .container {
+      width: 60%;
+    }
+  </style>
 
 </head>
 
 <body>
-  <?php require "../home/header.php";?>
+  <?php require "../home/header.php"; ?>
   <div class="container">
     <?php
-    $offset=0;
-    $stmt=mysqli_prepare($connection,"SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=?;");
+    $offset = 0;
+    $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=?;");
     mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-	  mysqli_stmt_execute($stmt);
-    $res=mysqli_stmt_get_result($stmt);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
 
-    $array_id=array();
-    while(($row=mysqli_fetch_array($res))!=NULL){
-      $stmt=mysqli_prepare($connection,"SELECT Rating FROM review WHERE UserId=? AND ProductId=?;");
+    $array_id = array();
+    while (($row = mysqli_fetch_array($res)) != NULL) {
+      $stmt = mysqli_prepare($connection, "SELECT Rating FROM review WHERE UserId=? AND ProductId=?;");
       mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $row['Id']);
       mysqli_stmt_execute($stmt);
-      $res_rating=mysqli_stmt_get_result($stmt);
-      $rating_value=0;
-      $button_disabled="";
-      if(($row_rating=mysqli_fetch_array($res_rating))!=NULL){
-        $rating_value=$row_rating[0];
-        $button_disabled="disabled";
+      $res_rating = mysqli_stmt_get_result($stmt);
+      $rating_value = 0;
+      $button_disabled = "";
+      if (($row_rating = mysqli_fetch_array($res_rating)) != NULL) {
+        $rating_value = $row_rating[0];
+        $button_disabled = "disabled";
       }
-       
-      array_push($array_id,$row['Id']);
+
+      array_push($array_id, $row['Id']);
       echo '<form action="../review/add../review/review.php" method="GET">
               <div class="row border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
-              <img src="../image/product/'.$row['Id'].'.jpg" alt="'.$row['Title'].'" width="200" height="250">  
+              <img src="../image/product/' . $row['Id'] . '.jpg" alt="' . $row['Title'] . '" width="200" height="250">  
               </div>
               
               <div class="row col p-4">
-                <h3 class="mb-0">'.$row['Title'].'</h3>
+                <h3 class="mb-0">' . $row['Title'] . '</h3>
                 
                   <div class="col-8">
                     <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="4" style="margin-top:30px;" required> this is the product review </textarea>
                   </div>
                   <div class="col-1"></div>
-                  <button type="submit" class="col-3 btn btn-dark" id="btn-dark" '.$button_disabled.'>Recensisci</button>
+                  <button type="submit" class="col-3 btn btn-dark" id="btn-dark" ' . $button_disabled . '>Recensisci</button>
 
-                  <input type="hidden" name="id" value="'.$row['Id'].'"> </input>
+                  <input type="hidden" name="id" value="' . $row['Id'] . '"> </input>
                 ';
-                include("../home/starRating.php");
-                
-      echo' </div>
+      include("../home/starRating.php");
+
+      echo ' </div>
             </div>
             </form>';
     }
     ?>
-    
-    
-      <?php require "../home/footer.php" ?>
+
+
+    <?php require "../home/footer.php" ?>
   </div>
-  
+
 </body>
+
 </html>

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
-    <?php include("../home/include.php")?>
+    <?php include("../home/include.php") ?>
 </head>
+
 <body>
     <header class="p-3 mb-3 border-bottom " style="--bs-border-color: black;">
-            <div class="d-flex justify-content-between mx-3 align-items-center">
-                <div class="d-flex align-items-center">
-                    <a href="../home/homepage.php" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                        <img src="../image/logo.jpg" height="50" width="50" alt="Logo">
-                    </a>
+        <div class="d-flex justify-content-between mx-3 align-items-center">
+            <div class="d-flex align-items-center">
+                <a href="../home/homepage.php" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img src="../image/logo.jpg" height="50" width="50" alt="Logo">
+                </a>
 
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="color: black;">
-                        <li><a href="../home/homepage.php" class="nav-link px-2 "> Home </a></li>
-                        <li><a href="../product/product.php" class="nav-link px-2 "> Products </a></li>
-                    </ul>
-                </div>    
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="color: black;">
+                    <li><a href="../home/homepage.php" class="nav-link px-2 "> Home </a></li>
+                    <li><a href="../product/product.php" class="nav-link px-2 "> Products </a></li>
+                </ul>
             </div>
+        </div>
     </header>
 
     <div class="d-flex justify-content-center mt-5">
@@ -32,4 +34,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -13,3 +13,5 @@ identare pagine / controllare div
 caricare su server
 
 no grafica aggiunta al carrello
+
+il carrello va a 0

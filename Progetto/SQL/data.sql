@@ -18,9 +18,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `s4803351`
+-- Database: `S4803351`
 --
-USE `s4803351`;
+USE `S4803351`;
 
 --
 -- Dump dei dati per la tabella `product`

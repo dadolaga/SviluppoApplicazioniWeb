@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `s4803351`
+-- Database: `S4803351`
 --
-CREATE DATABASE IF NOT EXISTS `s4803351` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `s4803351`;
+CREATE DATABASE IF NOT EXISTS `S4803351` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `S4803351`;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE `myorder` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
-  `Date` date NOT NULL DEFAULT current_timestamp()
+  `Date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

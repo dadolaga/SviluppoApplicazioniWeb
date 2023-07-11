@@ -58,7 +58,7 @@
 
                   <input type="hidden" name="id" value="' . $row['Id'] . '"> </input>
                 ';
-      include("../home/starRating.php");
+      include("../product/starRating.php");
 
       echo ' </div>
             </div>

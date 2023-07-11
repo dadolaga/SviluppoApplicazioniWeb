@@ -50,7 +50,7 @@
                 <div class="mb-1 text-muted">' . $row['Price'] . ' §</div>
                 <p class="mb-auto">' . $row['Description'] . '</p>
                 <form > <fieldset disabled> '; //fieldset disabilita tutto form stelline in product
-      include("../home/starRating.php");
+      include("../product/starRating.php");
       echo ' </fieldset>
             </form>
             </div>

@@ -63,7 +63,7 @@
                   </h3>
                   <div class="mb-2">' . $row['Price'] . ' §</div>
                   <form> <fieldset disabled>';
-          include("../home/starRating.php");
+          include("../product/starRating.php");
           echo ' </fieldset>
               </form>
               </div>

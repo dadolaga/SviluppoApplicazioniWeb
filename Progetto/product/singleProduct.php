@@ -41,7 +41,7 @@
               <?php echo $rowProduct['Price']; ?> §
             </h2>
             <?php
-            include("../home/starRatingSingle.php");
+            include("../product/starRatingSingle.php");
             ?>
             <button class="btn btn-primary btn-rounded" onclick="window.open('../cart/addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
           </div>

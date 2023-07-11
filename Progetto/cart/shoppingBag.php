@@ -80,7 +80,7 @@
 										</div>
 		
 										<div class="form-outline">
-											<input id="Pezzi_' . $cont . '" min="0" name="quantity_' . $row['Id'] . '" value="' . $row['Pice'] . '" type="number" class="form-control" readonly/>
+											<input id="Pezzi_' . $cont . '" min="1" name="quantity_' . $row['Id'] . '" value="' . $row['Pice'] . '" type="number" class="form-control" readonly/>
 										</div>	
 										<!-- bottone incremento quantità -->
 										<div class="btn btn-primary px-3 ms-2" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp(); updatePrice(' . $row['Id'] . ',' . $cont . ');" readonly>
@@ -185,6 +185,7 @@
 			.then(function(response) {
 				if (response.ok)
 					reloadPrice();
+				else alert("server not response");
 			});
 	}
 
@@ -196,17 +197,17 @@
 				document.getElementById("total_1").innerText = data + ' §';
 				document.getElementById("total_2").innerText = data + ' §';
 			})
-			.catch(error => console.error(error));
+			.catch(error => alert("server not response"));
 	}
 
 	function trash(id, cont) {
-
 		fetch('trash.php?id=' + id) //uso + per concatenare(javascript) passo con GET(default)
 			.then(function(response) {
-				if (response.ok) {
+				if (response.ok) { //controlla che trash.php ritorni errore 200 
 					document.getElementById("row_" + cont).remove();
 					reloadPrice();
 				}
+				else alert("server not response");
 			});
 	}
 
@@ -215,8 +216,6 @@
 		document.getElementById("form_cart").submit();
 	}
 </script>
-
-</html>
 
 
 <script>
@@ -316,3 +315,5 @@
 		});
 	});
 </script>
+
+</html>

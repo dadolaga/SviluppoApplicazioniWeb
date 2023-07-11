@@ -11,6 +11,6 @@
     if (!$connection) {
         /* Use your preferred error logging method here */
         error_log('Connection error: ' . mysqli_connect_error());
-        header("location: ../home/executeError.php");
+        header("Location: ../home/executeError.php");
     }
 ?>

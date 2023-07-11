@@ -30,13 +30,19 @@
                 <img src="../image/user.png" alt="mdo" width="32" height="32" class="rounded-circle float-start">
                 <?php
                 if (isset($_SESSION['Id'])) {
-                    $stmt = mysqli_prepare($connection, "SELECT Name FROM user WHERE user.Id=" . $_SESSION["Id"]);
-                    if (!mysqli_stmt_execute($stmt))
-                        echo "Errore nella connessione";
+                    $stmt = mysqli_prepare($connection, "SELECT Name FROM user WHERE user.Id=?");
+                    if (!$stmt){
+                        error_log('Query error: ' . mysqli_error($connection));
+                        header("Location: ../home/executeError.php");
+                    }
+                    mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
+                    if (!mysqli_stmt_execute($stmt)){
+                        header("Location: ../home/executeError.php");
+                    }
                     $res = mysqli_stmt_get_result($stmt); //piglio risultato
                     $row = mysqli_fetch_array($res); //piglio tutta la riga
 
-                    echo "<div class='truncate float-start mt-1'> Hello " . $row["Name"] . "</div>"; //per scrivere nome
+                    echo "<div class='truncate float-start mt-1'> Hello " . htmlspecialchars($row["Name"]) . "</div>"; //per scrivere nome (htmlspecialchars per non scrivere eventuale codice js)
                 }
                 ?>
             </a>

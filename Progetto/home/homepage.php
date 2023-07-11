@@ -4,11 +4,11 @@
 <head>
   <title>Homepage</title>
   <?php
-  $loginNotRequired = true;
-  require "../home/connection.php";
-  require "../home/include.php";
+    $loginNotRequired = true;
+    require "../home/connection.php";
+    require "../home/include.php";
 
-  $showSearch = true;
+    $showSearch = true;
   ?>
 
   <style>
@@ -48,13 +48,18 @@
       <div class="carousel-inner">
         <?php
         $stmt = mysqli_prepare($connection, "SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId  GROUP BY product.Id ORDER BY RAND() LIMIT 3");
+        if (!$stmt){
+            error_log('Query error: ' . mysqli_error($connection));
+            header("Location: ../home/executeError.php");
+        }
         if (!mysqli_stmt_execute($stmt))
-          echo "Errore nella connessione";
+            header("Location: ../home/executeError.php");
         $res = mysqli_stmt_get_result($stmt); //piglio risultato
+        
         $active = "active";
-        while (($row = mysqli_fetch_array($res)) != NULL) {
-          $rating_value = round($row['rating']);
-          echo '<div class="carousel-item ' . $active . '">
+        while (($row = mysqli_fetch_array($res)) != NULL) {    //vediamo prodotti che inseriamo noi quindi
+          $rating_value = round($row['rating']);               //no htmlentities perchè non mettiamo script js
+          echo '<div class="carousel-item ' . $active . '">    
               <div class="card flex-md-row box-shadow h-md-250">
                 <img class="card-img-left flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;   border-top-left-radius: 50px; border-bottom-left-radius: 50px;" src="../image/product/' . $row['Id'] . '.jpg" data-holder-rendered="true">
                 <div class="card-body d-flex flex-column align-items-start">

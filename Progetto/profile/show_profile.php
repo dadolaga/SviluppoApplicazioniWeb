@@ -7,18 +7,24 @@
   require "../home/connection.php"; //se non trova file da errore
   require "../home/include.php";
   if (isset($_SESSION['Id'])) {
-    $Id = $_SESSION['Id'];
-    $stmt = mysqli_prepare($connection, "SELECT * FROM user WHERE user.Id='$Id'");
+    $stmt = mysqli_prepare($connection, "SELECT * FROM user WHERE user.Id=?");
+    if (!$stmt){
+        error_log('Query error: ' . mysqli_error($connection));
+        header("Location: ../home/executeError.php");
+    }
+    mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
     if (!mysqli_stmt_execute($stmt))
-      echo "Errore nella connessione";
+        header("Location: ../home/executeError.php");
+
     $res = mysqli_stmt_get_result($stmt); //piglio risultato
     $row = mysqli_fetch_array($res); //piglio tutta la riga
-    $FIRSTNAME = htmlentities($row['Name']); //per evitare attacchi
-    $LASTNAME = htmlentities($row['Surname']);
-    $EMAIL = htmlentities($row['Email']);
-    $USERNAME = htmlentities($row['Username']);
-    $RESIDANCE = htmlentities($row['Residence']);
-    $BORN = htmlentities($row['BornDate']);
+
+    $FIRSTNAME = htmlspecialchars($row['Name']); //per evitare attacchi
+    $LASTNAME = htmlspecialchars($row['Surname']);
+    $EMAIL = htmlspecialchars($row['Email']);
+    $USERNAME = htmlspecialchars($row['Username']);
+    $RESIDANCE = htmlspecialchars($row['Residence']);
+    $BORN = htmlspecialchars($row['BornDate']);
   }
   ?>
 </head>

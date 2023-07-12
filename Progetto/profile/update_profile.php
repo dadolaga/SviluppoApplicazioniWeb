@@ -2,35 +2,34 @@
     require "../home/connection.php";
     if($_POST){
 
-        $firstname=mysqli_real_escape_string($connection,trim($_POST['firstname']));
-        $firstname = "\"$firstname\"";
-        $lastname=mysqli_real_escape_string($connection,trim($_POST['lastname']));
-        $lastname = "\"$lastname\"";
-        $email=mysqli_real_escape_string($connection,trim($_POST['email']));
-        $email = "\"$email\"";
+        $firstname=trim($_POST['firstname']);
+        $lastname=trim($_POST['lastname']);
+        $email=trim($_POST['email']);
         
-        $username=mysqli_real_escape_string($connection,trim($_POST['username']));
+        $username=trim($_POST['username']);
         if(empty($username)) 
-            $username='NULL';
-        else
-            $username = "\"$username\"";
+            $username=null;
 
-        $residance=mysqli_real_escape_string($connection,trim($_POST['residance']));
+        $residance=trim($_POST['residance']);
         if(empty($residance)) 
-            $residance='NULL';
-        else
-            $residance = "\"$residance\"";
+            $residance=null;
 
-        $born=mysqli_real_escape_string($connection,trim($_POST['born']));
+        $born=trim($_POST['born']);
         if(empty($born)) 
-            $born='NULL';
-        else    
-            $born = "\"$born\"";
+            $born=null;
 
-        $query = "UPDATE user SET Name=$firstname, Surname=$lastname, Email=$email, Username=$username, Residence=$residance, BornDate=$born WHERE Id=".$_SESSION['Id'];
-
-        if(mysqli_query($connection, $query) == false)
-            echo "Errore nella registrazione";
+        $stmt=mysqli_prepare($connection, "UPDATE user SET Name=?, Surname=?, Email=?, Username=?, Residence=?, BornDate=? WHERE Id=?");
+        if (!$stmt){
+            error_log('Query error: ' . mysqli_error($connection));
+            header("Location: ../home/executeError.php");
+        }
+        mysqli_stmt_bind_param($stmt, 'ssssssi',$firstname, $lastname, $email, $username, $residance, $born, $_SESSION['Id']);
+        if(!mysqli_stmt_execute($stmt)){
+            if(str_contains(mysqli_error($connection),"Unique_Username"))
+                echo '<script> alert("Username already exist"); history.back(); </script>';
+            if(str_contains(mysqli_error($connection),"Unique_Email"))
+                echo '<script> alert("Email already exist"); history.back(); </script>';
+        }
         else 
             header("location: ../home/homepage.php");
     }

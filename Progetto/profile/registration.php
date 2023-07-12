@@ -13,27 +13,36 @@
 
   require "../home/connection.php"; //se non trova file da errore
   require "../home/include.php";
+
+  $no_pass = "style= 'display: none'"; //per far uscire 'wrong pass'
+
+    $firstname = "";
+    $lastname = "";
+    $email ="";
+
   if (isset($_POST["firstname"])) { //se riceve qualcosa con POST dobbiamo registrarlo
-    $firstname = mysqli_real_escape_string($connection, trim($_POST['firstname']));
-    $lastname = mysqli_real_escape_string($connection, trim($_POST['lastname']));
-    $email = mysqli_real_escape_string($connection, trim($_POST['email']));
-    $password = mysqli_real_escape_string($connection, trim($_POST['pass']));
-    $confirm = mysqli_real_escape_string($connection, trim($_POST['confirm']));
+    $firstname = trim($_POST['firstname']);
+    $lastname = trim($_POST['lastname']);
+    $email = trim($_POST['email']);
+    $password = $_POST['pass'];
+    $confirm = $_POST['confirm'];
 
-    if ($password != $confirm) {
-      echo "Le password non corrispondono";
-      exit(1);
-    }
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = mysqli_prepare($connection, "INSERT INTO user(Name,Surname,Email,Password) VALUES(?,?,?,?)");
-    mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hash);
-    mysqli_stmt_execute($stmt);
-
-    if (mysqli_affected_rows($connection) === 0)
-      echo "Errore nella registrazione";
-    else {
-      echo "Utente registrato";
-      header("Location: ../profile/login.php");
+    if ($password != $confirm)
+        $no_pass = "style= 'display: block'";
+    else{
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = mysqli_prepare($connection, "INSERT INTO user(Name,Surname,Email,Password) VALUES(?,?,?,?)");
+        if (!$stmt){
+            error_log('Query error: ' . mysqli_error($connection));
+            header("Location: ../home/executeError.php");
+        }
+        mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hash);
+        if(!mysqli_stmt_execute($stmt)){
+            error_log('Query error: ' . mysqli_error($connection));
+            echo '<script> alert("email already exist"); </script>';
+        }
+        else
+            header("Location: ../profile/login.php");
     }
   }
   ?>
@@ -45,16 +54,18 @@
   <main class="form-signin w-100 my-5">
     <div class="col-md-10 m-auto col-lg-5">
       <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+      <p class="wrong_data" <?php echo $no_pass?>>password not corrispond</p>
+
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="firstname" id="floatingFirstname" placeholder="Firstname" required>
+          <input type="text" class="form-control" name="firstname" id="floatingFirstname" placeholder="Firstname"   value="<?php echo $firstname; ?>" required >
           <label for="floatingFirstname">Firstname</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="lastname" id="floatingLastname" placeholder="Lastname" required>
+          <input type="text" class="form-control" name="lastname" id="floatingLastname" placeholder="Lastname"  value="<?php echo $lastname; ?>" required>
           <label for="floatingLastname">Lastname</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
+          <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com"  value="<?php echo $email; ?>" required>
           <label for="floatingEmail">Email address</label>
         </div>
         <div class="form-floating mb-3">

@@ -43,14 +43,18 @@
 							<!-- inserimento automatico prodotti nel cart -->
 							<?php
 							$stmt = mysqli_prepare($connection, "SELECT * FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
+							if (!$stmt){
+								error_log('Query error: ' . mysqli_error($connection));
+								header("Location: ../home/executeError.php");
+							}
 							mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
 							if (!mysqli_stmt_execute($stmt))
-								echo "Errore nella connessione";
+								header("Location: ../home/executeError.php");
 							$res = mysqli_stmt_get_result($stmt); //piglio risultato
 
 							$cont = 0;
-							while (($row = mysqli_fetch_array($res)) != NULL) {
-								echo '<div id="row_' . $cont . '" class="row">
+							while (($row = mysqli_fetch_array($res)) != NULL) { 	 //vediamo prodotti che inseriamo noi quindi no htmlentities perchè non mettiamo script js
+								echo '<div id="row_' . $cont . '" class="row">		
 								<div class="col-3 ">
 								<!-- Image -->
 									<div class="bg-image hover-overlay ripple rounded" >
@@ -112,15 +116,7 @@
 				</div>
 
 			</div>
-			<?php
-			$stmt = mysqli_prepare($connection, "SELECT *, SUM(product.Price*Pice) AS total FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
-			mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-			if (!mysqli_stmt_execute($stmt))
-				echo "Errore nella connessione";
-			$res = mysqli_stmt_get_result($stmt); //piglio risultato
-			$row = mysqli_fetch_array($res);
-			$total = $row['total'];
-			?>
+			
 			<div class="col-md-4">
 				<div class="card mb-4">
 					<div class="card-header py-3">
@@ -130,7 +126,7 @@
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
 								Products
-								<span id="total_1"><?php echo $total ?> §</span>
+								<span id="total_1">... §</span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between align-items-center px-0">
 								Shipping
@@ -143,7 +139,7 @@
 										<p class="mb-0">(including IVA)</p>
 									</strong>
 								</div>
-								<span><strong id="total_2"><?php echo $total ?> §</strong></span>
+								<span><strong id="total_2">...  §</strong></span>
 							</li>
 						</ul>
 
@@ -191,7 +187,7 @@
 
 	function reloadPrice() {
 		fetch('updateTotalPrice.php') //passo con GET(default)
-			.then(response => response.text())
+			.then(response => response.text()) // => al posto di function
 			.then(data => {
 				// Aggiorna il front-end con il nuovo prezzo
 				document.getElementById("total_1").innerText = data + ' §';
@@ -215,6 +211,8 @@
 		//ricarica pagina dopo ordine
 		document.getElementById("form_cart").submit();
 	}
+
+	reloadPrice();
 </script>
 
 

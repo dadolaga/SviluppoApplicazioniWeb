@@ -1,4 +1,4 @@
-<main class="form-signin rating__stars " style="width: 230px; position:absolute; right:5px;" id="rating_form_<?php echo $row['Id'];?>" 
+<div class="form-signin rating__stars " style="width: 230px; position:absolute; right:5px;" id="rating_form_<?php echo $row['Id'];?>" 
         onmouseenter="disableWindowsOpen();" onmouseleave="enableWindowsOpen();">
 
     <!--identificare le valutazioni -->
@@ -37,5 +37,5 @@
             </label>';
         }
     ?>
-</main>
+</div>
 

@@ -4,11 +4,11 @@
 <head>
   <title>Product</title>
   <?php
-  $loginNotRequired = true;
-  require "../home/connection.php";
-  require "../home/include.php";
+    $loginNotRequired = true;
+    require "../home/connection.php";
+    require "../home/include.php";
 
-  $showSearch = true;
+    $showSearch = true;
   ?>
   <link href="../style/styleStar.css" rel="stylesheet">
 
@@ -26,7 +26,10 @@
     <?php
 
     $stmt = mysqli_prepare($connection, "SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId WHERE Title LIKE ? GROUP BY product.Id");
-
+    if (!$stmt){
+        error_log('Query error: ' . mysqli_error($connection));
+        header("Location: ../home/executeError.php");
+    }
     if (isset($_GET['name']))
       $name = "%" . $_GET['name'] . "%";
     else
@@ -34,10 +37,11 @@
 
     mysqli_stmt_bind_param($stmt, 's', $name);
     if (!mysqli_stmt_execute($stmt))
-      echo "Errore nella connessione";
+        header("Location: ../home/executeError.php");
     $res = mysqli_stmt_get_result($stmt); //piglio risultato
+
     $array_id = array();
-    while (($row = mysqli_fetch_array($res)) != NULL) {
+    while (($row = mysqli_fetch_array($res)) != NULL) { //vediamo prodotti che inseriamo noi quindi no htmlentities perchè non mettiamo script js
       $rating_value = round($row['rating']);
 
       array_push($array_id, $row['Id']);
@@ -66,15 +70,11 @@
 
 </html>
 <script>
+    //se schiaccio stelline non entro nel singolo prodotto
   var disable;
 
-  function disableWindowsOpen() {
-    disable = true;
-  }
-
-  function enableWindowsOpen() {
-    disable = false;
-  }
+  function disableWindowsOpen() { disable = true;}
+  function enableWindowsOpen() { disable = false;}
 
   function openWindow(id) {
     if (!disable)

@@ -23,15 +23,26 @@
     <?php
     $offset = 0;
     $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=?;");
+    if (!$stmt){
+      error_log('Query error: ' . mysqli_error($connection));
+      header("Location: ../home/executeError.php");
+    }
     mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-    mysqli_stmt_execute($stmt);
+    if(!mysqli_stmt_execute($stmt))
+        header("Location: ../home/executeError.php");
     $res = mysqli_stmt_get_result($stmt);
 
     $array_id = array();
     while (($row = mysqli_fetch_array($res)) != NULL) {
       $stmt = mysqli_prepare($connection, "SELECT Rating FROM review WHERE UserId=? AND ProductId=?;");
+      if (!$stmt){
+        error_log('Query error: ' . mysqli_error($connection));
+        header("Location: ../home/executeError.php");
+      }
       mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $row['Id']);
-      mysqli_stmt_execute($stmt);
+      if(!mysqli_stmt_execute($stmt))
+        header("Location: ../home/executeError.php");
+
       $res_rating = mysqli_stmt_get_result($stmt);
       $rating_value = 0;
       $button_disabled = "";
@@ -65,8 +76,6 @@
             </form>';
     }
     ?>
-
-
     <?php require "../home/footer.php" ?>
   </div>
 

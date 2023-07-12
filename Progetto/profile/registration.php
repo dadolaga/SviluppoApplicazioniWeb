@@ -40,7 +40,7 @@
     $password = $_POST['pass'];
     $confirm = $_POST['confirm'];
 
-    if ($password != $confirm || check_password($password))
+    if ($password != $confirm || !check_password($password))
         $no_pass = "style= 'display: block'";
     else{
         $hash = password_hash($password, PASSWORD_DEFAULT);

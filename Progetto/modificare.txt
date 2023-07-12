@@ -1,10 +1,4 @@
-fare i vari controlli (email, password ecc)
-
 togliere errori con wave
-
-controllare utente loggato ma nome non esiste in DB
-
-fare controlli sql 
 
 identare pagine / controllare div
 

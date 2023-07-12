@@ -2,7 +2,7 @@
     require "../home/connection.php"; //se non trova file da errore
 
     if (isset($_GET['id']) && isset($_GET['rating'])) { //se riceve qualcosa con POST dobbiamo registrarlo
-        $stmt = mysqli_prepare($connection, "INSERT INTO review(UserId, ProductId, Rating,) VALUES(?,?,?)");
+        $stmt = mysqli_prepare($connection, "INSERT INTO review(UserId, ProductId, Rating) VALUES(?,?,?)");
         if (!$stmt){
             error_log('Query error: ' . mysqli_error($connection));
             header("Location: ../home/executeError.php");

@@ -52,7 +52,7 @@
       }
 
       array_push($array_id, $row['Id']);
-      echo '<form action="../review/add../review/review.php" method="GET">
+      echo '<form action="../review/addReview.php" method="GET">
               <div class="row border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
               <img src="../image/product/' . $row['Id'] . '.jpg" alt="' . $row['Title'] . '" width="200" height="250">  

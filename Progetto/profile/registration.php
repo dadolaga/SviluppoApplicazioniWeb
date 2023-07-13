@@ -75,7 +75,7 @@
 
   <main class="form-signin w-100 my-5">
     <div class="col-md-10 m-auto col-lg-5">
-      <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST" id="registration">
+      <form class="p-4 p-md-5 rounded-3 " style="background-color: #f8edeb4a;" method="POST" id="registration">
       <p class="wrong_data" <?php echo $no_pass?>> !! Password not coherent</p>
 
         <div class="form-floating mb-3">

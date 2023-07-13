@@ -18,27 +18,30 @@
 
   require "../home/connection.php"; //se non trova file da errore
   require "../home/include.php";
-  $no_log = "style= 'display: none'";
+  $no_log = "style= 'display: none'"; //per far uscire 'wrong email'
 
   if (isset($_POST["email"]) && isset($_POST["pass"])) {
-    $email = mysqli_real_escape_string($connection, trim($_POST['email']));
-    $password = mysqli_real_escape_string($connection, trim($_POST['pass']));
+    $email = trim($_POST['email']); //trim per non avere spazi nella mail
+    $password = $_POST['pass'];
 
-    $stmt = mysqli_prepare($connection, "SELECT Id,Name,Password FROM user WHERE user.Email='$email'");
+    $stmt = mysqli_prepare($connection, "SELECT Id,Name,Password FROM user WHERE user.Email=?");
+    if (!$stmt){
+        error_log('Query error: ' . mysqli_error($connection));
+        header("Location: ../home/executeError.php");
+    }
+    mysqli_stmt_bind_param($stmt, 's', $email);
     if (!mysqli_stmt_execute($stmt))
-      echo "Errore nella connessione";
+        header("Location: ../home/executeError.php");
     $res = mysqli_stmt_get_result($stmt); //piglio risultato
     $row = mysqli_fetch_array($res); //piglio tutta la riga
-    $conta = mysqli_num_rows($res);
 
-    if ($conta == 1 && password_verify($password, $row['Password'])) {
+    //se email esiste e la pass è giusta
+    if ($row!=null && password_verify($password, $row['Password'])) {
       $_SESSION['Id'] = $row['Id'];
-      $_SESSION['name'] = $row['Name'];
-      $_SESSION['password'] = $password;
       header("Location: ../home/homepage.php");
-    } else {
+    } 
+    else 
       $no_log = "style= 'display: block'";
-    }
   }
   ?>
 </head>

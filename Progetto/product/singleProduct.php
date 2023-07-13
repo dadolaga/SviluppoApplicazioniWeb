@@ -11,14 +11,20 @@
     $id = mysqli_real_escape_string($connection, $_GET['id']);
 
     $stmt = mysqli_prepare($connection, "SELECT product.*, AVG(review.Rating) AS rating FROM product LEFT JOIN review ON product.Id = review.ProductId WHERE product.Id=? GROUP BY product.Id");
+    if (!$stmt){
+      error_log('Query error: ' . mysqli_error($connection));
+      header("Location: ../home/executeError.php");
+    }
     mysqli_stmt_bind_param($stmt, 'i', $id);
-
-
     if (!mysqli_stmt_execute($stmt))
-      echo "Errore nella connessione";
+      header("Location: ../home/executeError.php");
     $res = mysqli_stmt_get_result($stmt); //piglio risultato
+
     $rowProduct = mysqli_fetch_array($res); //piglio tutta la riga
     $rating_value = round($rowProduct['rating']);
+  }
+  else {
+    header("Location: ../home/executeError.php");
   }
   ?>
   <link href="../style/styleStar.css" rel="stylesheet">
@@ -40,9 +46,7 @@
             <h2 class="mt-5">
               <?php echo $rowProduct['Price']; ?> §
             </h2>
-            <?php
-            include("../home/starRatingSingle.php");
-            ?>
+            <?php include("../product/starRatingSingle.php"); ?>
             <button class="btn btn-primary btn-rounded" onclick="window.open('../cart/addToCart.php?id=<?php echo $id ?>', '_self')"> Add to cart</button>
           </div>
         </div>

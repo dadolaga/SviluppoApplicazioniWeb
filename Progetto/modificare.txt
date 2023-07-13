@@ -1,17 +1,5 @@
-fare i vari controlli (email, password ecc)
-
 togliere errori con wave
-
-controllare utente loggato ma nome non esiste in DB
-
-fare controlli sql 
-
-dividere file in cartelle
 
 identare pagine / controllare div
 
 caricare su server
-
-no grafica aggiunta al carrello
-
-il carrello va a 0

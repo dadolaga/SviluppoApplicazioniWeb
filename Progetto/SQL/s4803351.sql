@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 07, 2023 alle 18:48
+-- Creato il: Lug 12, 2023 alle 16:24
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -29,6 +29,7 @@ USE `S4803351`;
 -- Struttura della tabella `cart`
 --
 -- Creazione: Apr 18, 2023 alle 13:51
+-- Ultimo aggiornamento: Lug 12, 2023 alle 14:22
 --
 
 CREATE TABLE `cart` (
@@ -42,7 +43,8 @@ CREATE TABLE `cart` (
 --
 -- Struttura della tabella `myorder`
 --
--- Creazione: Giu 16, 2023 alle 13:23
+-- Creazione: Lug 12, 2023 alle 14:11
+-- Ultimo aggiornamento: Lug 12, 2023 alle 14:22
 --
 
 CREATE TABLE `myorder` (
@@ -50,7 +52,8 @@ CREATE TABLE `myorder` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
-  `Date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Date` date NOT NULL DEFAULT current_timestamp(),
+  `Reviewed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -92,6 +95,7 @@ CREATE TABLE `review` (
 -- Struttura della tabella `user`
 --
 -- Creazione: Lug 06, 2023 alle 10:19
+-- Ultimo aggiornamento: Lug 12, 2023 alle 08:32
 --
 
 CREATE TABLE `user` (

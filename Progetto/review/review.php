@@ -22,16 +22,27 @@
   <div class="container">
     <?php
     $offset = 0;
-    $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=?;");
+    $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=? ORDER BY Reviewed ASC , Date DESC");
+    if (!$stmt){
+      error_log('Query error: ' . mysqli_error($connection));
+      header("Location: ../home/executeError.php");
+    }
     mysqli_stmt_bind_param($stmt, 'i', $_SESSION['Id']);
-    mysqli_stmt_execute($stmt);
+    if(!mysqli_stmt_execute($stmt))
+        header("Location: ../home/executeError.php");
     $res = mysqli_stmt_get_result($stmt);
 
     $array_id = array();
     while (($row = mysqli_fetch_array($res)) != NULL) {
       $stmt = mysqli_prepare($connection, "SELECT Rating FROM review WHERE UserId=? AND ProductId=?;");
+      if (!$stmt){
+        error_log('Query error: ' . mysqli_error($connection));
+        header("Location: ../home/executeError.php");
+      }
       mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $row['Id']);
-      mysqli_stmt_execute($stmt);
+      if(!mysqli_stmt_execute($stmt))
+        header("Location: ../home/executeError.php");
+
       $res_rating = mysqli_stmt_get_result($stmt);
       $rating_value = 0;
       $button_disabled = "";
@@ -41,7 +52,7 @@
       }
 
       array_push($array_id, $row['Id']);
-      echo '<form action="../review/add../review/review.php" method="GET">
+      echo '<form action="../review/addReview.php" method="GET">
               <div class="row border rounded mb-4 bg-white position-relative">
               <div class="col-auto p-0 rounded">
               <img src="../image/product/' . $row['Id'] . '.jpg" alt="' . $row['Title'] . '" width="200" height="250">  
@@ -58,15 +69,13 @@
 
                   <input type="hidden" name="id" value="' . $row['Id'] . '"> </input>
                 ';
-      include("../home/starRating.php");
+      include("../product/starRating.php");
 
       echo ' </div>
             </div>
             </form>';
     }
     ?>
-
-
     <?php require "../home/footer.php" ?>
   </div>
 

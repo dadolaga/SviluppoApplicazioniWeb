@@ -1,15 +1,9 @@
 <?php
-    require "../home/connection.php";
+    session_start();
     if(isset($_SESSION['Id'])) {
-    
-        $_SESSION = []; // Reset dell'array di sessione
-    
-        if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '', time()-86400, '/');
-            // Reset del cookie di sessione
-        }
-        session_destroy(); // Chiusura sessione
+        setcookie(session_name(), '', time()-86400, '/'); // Reset del cookie di sessione
+        if(!session_destroy()) // Chiusura sessione
+            header("Location: ../home/executeError.php");
     } 
     header('Location: ../profile/login.php'); // Reindirizzamento
-    exit; // Fine script
 ?>

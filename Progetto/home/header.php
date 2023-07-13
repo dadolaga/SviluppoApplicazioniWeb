@@ -21,8 +21,8 @@
 
 
         <div class="col-auto <?php if (isset($_SESSION['Id'])) echo "d-none" ?>" id="login">
-            <button type="button" class="btn btn-outline-primary me-2" onclick="window.open('../profile/login.php','_self')">Login</button>
-            <button type="button" class="btn btn-primary" onclick="window.open('../profile/registration.php','_self')">Sign-up</button>
+            <button type="button" class="btn btn-outline-primary me-2" style="border-color: black; font-weight: bold;" onclick="window.open('../profile/login.php','_self')">Login</button>
+            <button type="button" class="btn btn-primary" style="border-color: black; font-weight: bold;" onclick="window.open('../profile/registration.php','_self')">Sign-up</button>
         </div>
 
         <div class="dropdown d-flex align-items-center <?php if (!isset($_SESSION['Id'])) echo "d-none" ?>" id="alien_user"> <!--d-none nasconde logo-->

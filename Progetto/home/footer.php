@@ -6,22 +6,22 @@
     <div class=" mb-3">
       <h5>Shipping</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">Payment methods</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">Delivery methods</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">Payment methods</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">Delivery methods</a></li>
       </ul>
     </div>
     <div class=" mb-3">
       <h5>Information</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">Return or exchange item</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">FAQs</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">Return or exchange item</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">FAQs</a></li>
       </ul>
     </div>
     <div class=" mb-3">
       <h5>About us</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">About</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">Contact us</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">About</a></li>
+        <li class="nav-item mb-2"><a href="../home/underConstruction.php" class="nav-link p-0 ">Contact us</a></li>
       </ul>
     </div>
   </div>

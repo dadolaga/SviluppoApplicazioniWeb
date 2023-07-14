@@ -52,7 +52,7 @@ CREATE TABLE `myorder` (
   `UserId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
-  `Date` date NOT NULL DEFAULT current_timestamp(),
+  `Date` timestamp NOT NULL DEFAULT current_timestamp(),
   `Reviewed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

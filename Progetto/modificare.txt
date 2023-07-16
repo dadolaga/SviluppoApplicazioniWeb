@@ -1,5 +1,0 @@
-togliere errori con wave
-
-identare pagine / controllare div
-
-caricare su server

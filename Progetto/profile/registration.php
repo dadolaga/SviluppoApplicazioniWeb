@@ -122,7 +122,7 @@
     let password; //per questa funzione
     password=document.getElementById("registration").elements["pass"].value; //per prendere elemento password dentro al form
     
-    if(password.lenght < 8 || !checkPassword(password)){
+    if(password.length < 8 || !checkPassword(password)){
       alert ("control the password");
       event.preventDefault();
     }

@@ -14,13 +14,24 @@
 			$id = explode("_", $key[$i])[1];
 			$quantity = $_POST[$key[$i]];
 
-			$stmt = mysqli_prepare($connection, "INSERT INTO myOrder(UserId, ProductId, Quantity) VALUES(?,?,?);");
+			$stmt = mysqli_prepare($connection, "INSERT INTO myorder(UserId, ProductId, Quantity) VALUES(?,?,?);");
+			if (!$stmt){
+				error_log('Query error: ' . mysqli_error($connection));
+				header("Location: ../home/executeError.php");
+			}
 			mysqli_stmt_bind_param($stmt, 'iii', $_SESSION['Id'], $id, $quantity);
-			mysqli_stmt_execute($stmt);
+			if(!mysqli_stmt_execute($stmt))
+        		header("Location: ../home/executeError.php");
 
 			$stmt = mysqli_prepare($connection, "DELETE FROM cart WHERE UserId=? AND ProductId=?;");
+			if (!$stmt){
+				error_log('Query error: ' . mysqli_error($connection));
+				header("Location: ../home/executeError.php");
+			}
 			mysqli_stmt_bind_param($stmt, 'ii', $_SESSION['Id'], $id);
-			mysqli_stmt_execute($stmt);
+			if(!mysqli_stmt_execute($stmt))
+        		header("Location: ../home/executeError.php");
+
 		}
 	}
 

@@ -22,7 +22,7 @@
   <div class="container">
     <?php
     $offset = 0;
-    $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title FROM myOrder JOIN product ON myorder.ProductId=product.Id WHERE UserId=? ORDER BY Reviewed ASC , Date DESC");
+    $stmt = mysqli_prepare($connection, "SELECT DISTINCT Id, Title, Reviewed, Date FROM myorder JOIN product ON myorder.ProductId=product.Id WHERE UserId=? ORDER BY Reviewed ASC , Date DESC");
     if (!$stmt){
       error_log('Query error: ' . mysqli_error($connection));
       header("Location: ../home/executeError.php");

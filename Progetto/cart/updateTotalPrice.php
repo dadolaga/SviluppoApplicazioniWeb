@@ -1,7 +1,7 @@
 <?php 
     require "../home/connection.php"; //se non trova file da errore
 	
-    $stmt=mysqli_prepare($connection,"SELECT *, SUM(product.Price*Pice) AS total FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
+    $stmt=mysqli_prepare($connection,"SELECT SUM(product.Price*Pice) AS total FROM cart JOIN product ON ProductId = product.Id WHERE UserId=?;");
     if (!$stmt){
         error_log('Query error: ' . mysqli_error($connection));
         http_response_code(400);
